@@ -1,8 +1,8 @@
 <template>
     <main-container>
-        <page-view>
+        <page-view style="width: 1226px;">
             <div class="swiper-box ">
-                <div class="">
+                <div class="h-full">
                     <swipe :autoplay="3000" lazy-render touchable="true" indicator-color="white" class="h-full">
                         <swipe-item class="h-full">
                             <img src="../assets/img/l1.webp" />

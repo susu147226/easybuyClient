@@ -19,15 +19,15 @@
               <li>Select Location</li>
             </ul>
             <ul class="right-box">
-              <li>登录</li>
-              <li>注册</li>
+              <li @click="$router.push({ name: 'Login' })">登录</li>
+              <li @click="$router.push({name:'Register'})">注册</li>
               <li>消息通知</li>
               <li>购物车<span>(0)</span></li>
             </ul>
           </div>
         </div>
         <div class="searcher-box h-[80px] flex w-[1226px] items-center mx-auto justify-between">
-          <img src="../assets/img/login.png" class="h-[55px] cursor-pointer">
+          <img src="../assets/img/logo.png" class="h-[55px] cursor-pointer">
           <ul class="search-ul">
             <li>Xiaomi手机</li>
             <li>Redmi红米</li>
@@ -56,6 +56,7 @@
 </template>
 
 <script setup>
+
 </script>
 
 <style scoped lang="scss">
