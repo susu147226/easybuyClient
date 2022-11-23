@@ -97,6 +97,7 @@
                     </ul>
                 </div>
             </div>
+
             <div class="bg-gray-100 w-full">
                 <div class="w-[1226px] mx-auto">
                     <!--    中间的间隔-->
@@ -156,8 +157,14 @@
                     </div>
                 </div>
             </div>
+
+
+
+
+
         </main-container>
     </page-view>
+
 </template>
 
 
@@ -206,7 +213,10 @@ const imgList = [
 <style  lang="scss" scoped>
 .swiper-box {
     position: relative;
+
     @apply h-[460px];
+
+
 
     >.left-menu {
         width: 234px;

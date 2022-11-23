@@ -79,6 +79,7 @@ const submitLoginForm = () => {
 };
 
 const checkLogin = () => {
+    isLoading.value = true;
     API.customInfo.checkLogin(customInfo).then(res => {
         console.log(res);
         store.setToken(res.token);
@@ -96,7 +97,7 @@ const checkLogin = () => {
     }).catch(err => {
         console.log(err);
     }).finally(() => {
-
+        isLoading.value = false;
     })
 }
 
