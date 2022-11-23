@@ -11,6 +11,7 @@ import PiniaPluginPersistedstate from "pinia-plugin-persistedstate"
 
 // 导入tailwindcss样式配置
 import "./assets/css/index.css";
+import "./assets/scss/comm.scss";
 
 //导入element-plus
 import ElementPlus from 'element-plus';
