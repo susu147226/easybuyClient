@@ -6,10 +6,10 @@
             <div class="top-bar h-[55px] flex flex-row justify-between items-center">
                 <img src="../assets/img/Logo.png" @click="$router.push({ name: 'HomePage' })" alt="" class=" cursor-pointer w-[40px] h-[40px] ml-20">
                 <div class="flex flex-row justify-evenly items-center w-[320px]">
-                    <el-link :underline="false">用户协议</el-link>
-                    <el-link :underline="false">隐私政策</el-link>
-                    <el-link :underline="false">帮助中心</el-link>
-                    <el-link :underline="false">中文简体</el-link>
+                    <el-link @click="$router.push({ name: 'HomePage' })"  :underline="false">用户协议</el-link>
+                    <el-link @click="$router.push({ name: 'HomePage' })" :underline="false">隐私政策</el-link>
+                    <el-link @click="$router.push({ name: 'HomePage' })" :underline="false">帮助中心</el-link>
+                    <el-link @click="$router.push({ name: 'HomePage' })" :underline="false">中文简体</el-link>
                 </div>
             </div>
             <div>
