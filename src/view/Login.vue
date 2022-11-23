@@ -2,11 +2,11 @@
     <page-login>
         <page-view>
             <div class="flex flex-1 justify-center items-center mt-[10%]">
-                <div class="w-[500px] border border-solid ">
+                <div class="w-[500px] bg-white shadow-2xl">
                     <div class="m-[20px]">
                         <div class="flex justify-between items-center mt-[50px]">
                             <h2 class="h2">欢迎登录</h2>
-                            <el-link type="primary">去注册</el-link>
+                            <el-link type="primary" @click="$router.push(name = 'register')">去注册</el-link>
                         </div>
                         <el-form class="mt-[40px] mb-[20px]">
                             <el-form-item>
