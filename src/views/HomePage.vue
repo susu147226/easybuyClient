@@ -38,7 +38,7 @@
                     </ul>
                 </div>
             </div>
-            
+
         </page-view>
     </main-container>
 </template>
@@ -56,14 +56,15 @@ import { Swipe, SwipeItem } from "vant"
 <style  lang="scss" scoped>
 .swiper-box {
     position: relative;
-    @apply  border border-solid border-black;
-    >.left-menu{
+    @apply border border-solid border-black;
+
+    >.left-menu {
         width: 250px;
         height: 100%;
         position: absolute;
         left: 0;
         top: 0;
-        background-color: rgba(126, 126,126,0.6);
+        background-color: rgba(126, 126, 126, 0.6);
         z-index: 2;
     }
 }
