@@ -6,7 +6,7 @@
                     <div class="m-[20px]">
                         <div class="flex justify-between items-center">
                             <h2 class="h2">欢迎注册</h2>
-                            <el-link type="primary" @click="$router.push(name = 'login')">去登录</el-link>
+                            <el-link type="primary" @click="$router.push(name = 'Login')">去登录</el-link>
                         </div>
                         <el-form class="mt-[15px]" label-width="80px">
                             <el-form-item label="用户昵称">
@@ -83,5 +83,9 @@ const value1 = ref("");
 .h2 {
     font-size: 22px;
     font-weight: normal;
+}
+
+:deep(.el-date-editor--datetime) {
+    width: 100%;
 }
 </style>    
