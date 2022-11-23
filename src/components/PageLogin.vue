@@ -1,9 +1,9 @@
 <template>
     <div class="page-login flex flel-row">
         <img class="bg-img" src="../assets/img/登录注册背景.jpg" alt="">
-        <div class="left-form flex-1 overflow-auto flex flex-col">
-            <div class="top-bar h-[55px] border border-solid flex flex-row justify-between items-center">
-                <img src="../assets/img/Logo.png" alt="" class="w-[55px] h-[55px]">
+        <div class="left-form flex-1 flex flex-col">
+            <div class="top-bar h-[65px] border border-solid flex flex-row justify-between items-center">
+                <img src="../assets/img/Logo.png" alt="" class="w-[50px] h-[50px] ml-15">
                 <div class="flex flex-row justify-evenly items-center w-[320px]">
                     <el-link :underline="false">用户协议</el-link>
                     <el-link :underline="false">隐私政策</el-link>
@@ -24,13 +24,13 @@
   
 <style scoped lang="scss">
 .page-login {
-    width: 1200;
+    width: 100%;
     height: 100%;
     overflow: auto;
 
     .bg-img {
         width: 400px;
-        height: fit-content;
+        height: 100%;
     }
 }
 </style>
