@@ -10,7 +10,7 @@
   
   <style scoped lang="scss">
   .page-view{
-    width: 1200;
+    width: 1226px;
     height: 100%;
     overflow: auto;
   }
