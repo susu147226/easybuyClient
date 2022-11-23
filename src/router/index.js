@@ -10,12 +10,12 @@ const router = createRouter({
             }
         },
         {
-            path: "login",
+            path: "/login",
             name: "login",
             component: () => import("../view/login.vue"),
         },
         {
-            path: "regiest",
+            path: "/regiest",
             name: "regiest",
             component: () => import("../view/regiest.vue"),
         },

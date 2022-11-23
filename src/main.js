@@ -21,8 +21,8 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 // 导入animatecss样式
 import "animate.css"
 
-import "./components/PageLogin.vue";
-import "./components/PageView.vue";
+import PageView from "./components/PageLogin.vue";
+import PageLogin from "./components/PageView.vue";
 
 const app = createApp(App)
 const pinia = createPinia()
