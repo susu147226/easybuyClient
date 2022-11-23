@@ -5,15 +5,15 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
-  resolve: {
-    extensions: [".js", ".json", ".vue", ".mjs", "wasm"],
-    alias: [
-        {
-            find: "@",
-            replacement: path.join(__dirname, "./src")
-        }
-    ]
-},
-base:"./"
+    plugins: [vue()],
+    resolve: {
+        extensions: [".js", ".json", ".vue", ".mjs", "wasm"],
+        alias: [
+            {
+                find: "@",
+                replacement: path.join(__dirname, "./src")
+            }
+        ]
+    },
+    base: "./",
 })
