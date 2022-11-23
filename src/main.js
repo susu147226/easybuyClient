@@ -20,9 +20,12 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 
 // 导入animatecss样式
 import "animate.css"
+// 导入了vant样式
+import "vant/lib/index.css"
 
-import PageView from "./components/PageLogin.vue";
-import PageLogin from "./components/PageView.vue";
+import MainContainer from "./components/MainContainer.vue"
+import PageView from "./components/PageView.vue"
+import PageLogin from "./components/PageLogin.vue";
 
 const app = createApp(App)
 const pinia = createPinia()
@@ -39,6 +42,9 @@ app.use(ElementPlus);
 app.use(ElementPlus, {
     locale: zhCn,
 });
+
+app.component("page-view", PageView);
+app.component("main-container",MainContainer)
 // 使用大菠萝
 app.use(pinia)
 // 使用路由

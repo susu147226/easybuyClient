@@ -92,7 +92,7 @@ const checkLogin = () => {
         });
 
         router.replace({
-            name: ""
+            name: "HomePage"
         });
     }).catch(err => {
         console.log(err);

@@ -1,9 +1,10 @@
 <template>
     <div class="page-login flex flel-row">
-        <img class="bg-img" src="../assets/img/登录注册背景.jpg" alt="">
+        <img class="bg-img " src="../assets/img/登录注册背景.jpg"
+            alt="">
         <div class="left-form flex-1 flex flex-col">
             <div class="top-bar h-[55px] flex flex-row justify-between items-center">
-                <img src="../assets/img/Logo.png" alt="" class="w-[40px] h-[40px] ml-20">
+                <img src="../assets/img/Logo.png" @click="$router.push({ name: 'HomePage' })" alt="" class=" cursor-pointer w-[40px] h-[40px] ml-20">
                 <div class="flex flex-row justify-evenly items-center w-[320px]">
                     <el-link :underline="false">用户协议</el-link>
                     <el-link :underline="false">隐私政策</el-link>
