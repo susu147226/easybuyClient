@@ -73,11 +73,14 @@
 <script setup>
 import { UploadFilled, Picture } from "@element-plus/icons-vue"
 import { ref } from "vue";
+import API from "../Utils/API";
 
 const isagree = ref(false);
 
 const sex = ref(true);
 const value1 = ref("");
+
+
 </script>
 <style scoped lang="scss">
 .h2 {

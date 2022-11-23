@@ -79,10 +79,11 @@ const submitLoginForm = () => {
 };
 
 const checkLogin = () => {
+    isLoading.value = true;
     API.customInfo.checkLogin(customInfo).then(res => {
         console.log(res);
         store.setToken(res.token);
-        store.setloginClientInfo(res.loginClientInfo);
+        store.setLoginClientInfo(res.loginClientInfo);
 
         ElMessage({
             showClose: true,
@@ -96,7 +97,7 @@ const checkLogin = () => {
     }).catch(err => {
         console.log(err);
     }).finally(() => {
-
+        isLoading.value = false;
     })
 }
 
