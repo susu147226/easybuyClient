@@ -11,6 +11,7 @@ import PiniaPluginPersistedstate from "pinia-plugin-persistedstate"
 
 // 导入tailwindcss样式配置
 import "./assets/css/index.css";
+import "./assets/scss/comm.scss";
 
 //导入element-plus
 import ElementPlus from 'element-plus';
@@ -24,12 +25,18 @@ import "vant/lib/index.css"
 
 import MainContainer from "./components/MainContainer.vue"
 import PageView from "./components/PageView.vue"
+import PageLogin from "./components/PageLogin.vue";
+
 const app = createApp(App)
 const pinia = createPinia()
 // 加载持久化插件
 pinia.use(PiniaPluginPersistedstate);
 // 全局注入baseURL
 app.provide("baseURL", baseURL)
+
+app.component("page-login", PageLogin);
+app.component("page-view", PageView);
+
 // 使用element组件
 app.use(ElementPlus);
 app.use(ElementPlus, {

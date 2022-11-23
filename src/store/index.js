@@ -1,6 +1,7 @@
 /**
  * 存储配置pinia区域
  */
+import { Flag } from "@element-plus/icons-vue";
 import { defineStore } from "pinia";
 import WebStorageCache from "web-storage-cache";
 
@@ -13,12 +14,22 @@ const cache = new WebStorageCache({
 export const mainStore = defineStore("main", {
     state() {
         return {
-           
+            token: null,
+            loginClientInfo: null,
         }
     },
     // pinia里面没有mutations
     actions: {
-        
+        setToken(token) {
+            this.token = token;
+        },
+        setLoginClientInfo(loginClientInfo) {
+            this.loginClientInfo = loginClientInfo;
+        },
+        logOut() {
+            this.token = null;
+            this.loginClientInfo = null;
+        },
     },
     // 配置状态持久化
     persist: {
@@ -31,6 +42,6 @@ export const mainStore = defineStore("main", {
             clear: () => cache.clear()
         },
         // 配置需要持久化的字段
-        paths: []
+        paths: ["token", "loginClientInfo"],
     }
 })
