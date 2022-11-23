@@ -9,8 +9,16 @@ const router = createRouter({
                 name: ""
             }
         },
-           
-        
+        {
+            path: "Login",
+            name: "Login",
+            component: () => import("../view/Login.vue"),
+        },
+        {
+            path: "Regiest",
+            name: "Regiest",
+            component: () => import("../view/Regiest.vue"),
+        },
     ]
 });
 

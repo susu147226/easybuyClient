@@ -21,12 +21,19 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 // 导入animatecss样式
 import "animate.css"
 
+import "./components/PageLogin.vue";
+import "./components/PageView.vue";
+
 const app = createApp(App)
 const pinia = createPinia()
 // 加载持久化插件
 pinia.use(PiniaPluginPersistedstate);
 // 全局注入baseURL
 app.provide("baseURL", baseURL)
+
+app.component("page-login", PageLogin);
+app.component("page-view", PageView);
+
 // 使用element组件
 app.use(ElementPlus);
 app.use(ElementPlus, {
