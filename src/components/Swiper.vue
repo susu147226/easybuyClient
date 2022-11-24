@@ -30,7 +30,6 @@
 
 
 
-
 const imgList = [
     {
         src: new URL('../assets/img/l1.webp', import.meta.url).href,
