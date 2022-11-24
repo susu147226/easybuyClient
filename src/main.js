@@ -27,6 +27,7 @@ import MainContainer from "./components/MainContainer.vue"
 import PageView from "./components/PageView.vue"
 import PageLogin from "./components/PageLogin.vue";
 import TitleBar from "./components/TitleBar.vue"
+import Swiper from "./components/Swiper.vue";
 const app = createApp(App)
 const pinia = createPinia()
 // 加载持久化插件
@@ -47,6 +48,7 @@ app.component("page-view", PageView);
 app.component("main-container",MainContainer)
 app.component("title-bar",TitleBar)
 app.component("foot-bar",FootBar)
+app.component("swiper", Swiper)
 // 使用大菠萝
 app.use(pinia)
 // 使用路由

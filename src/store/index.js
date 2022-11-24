@@ -1,7 +1,7 @@
 /**
  * 存储配置pinia区域
  */
-import { Flag } from "@element-plus/icons-vue";
+
 import { defineStore } from "pinia";
 import WebStorageCache from "web-storage-cache";
 
