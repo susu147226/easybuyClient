@@ -90,9 +90,11 @@
                         <!-- 商品的标题-->
                         <div class="flex flex-row justify-between h-[50px] items-center">
                             <h2 class="text-[22px] text-gray-700 font-light">手机</h2>
-                            <a href="javascript:void(0)" class=" transition-all hover:text-[#ff6700] ">
+                            <a href="javascript:void(0)" class="flex items-center transition-all hover:text-[#ff6700]">
                                 查看更多
-                                <span class="iconfont icon-Rrl_s_138"></span>
+                                <el-icon color="#ff6700" style="font-size: 18px;">
+                                    <ArrowRight />
+                                </el-icon>
                             </a>
                         </div>
                         <div class="goods-grid-box">
@@ -128,37 +130,208 @@
                                     <span class="text-[12px] text-gray-500">热门</span>
                                 </div>
                                 <div>
-                                    <span class="iconfont icon-Rrl_s_138 text-[#ff6700]" style="font-size: 36px"></span>
+                                    <el-icon color="#ff6700" style="font-size: 36px;">
+                                        <ArrowRight />
+                                    </el-icon>
                                 </div>
                             </a>
                         </div>
                     </div>
+                    <!--商品列表--电视 -->
+                    <div class="home-brick-box base-width m-auto py-2">
+                        <!-- 商品的标题-->
+                        <div class="flex flex-row justify-between h-[50px] items-center">
+                            <h2 class="text-[22px] text-gray-700 font-light">电视</h2>
+                            <a href="javascript:void(0)"
+                                class=" transition-all flex items-center hover:text-[#ff6700] ">
+                                查看更多
+                                <el-icon color="#ff6700" style="font-size: 18px;">
+                                    <ArrowRight />
+                                </el-icon>
+                            </a>
+                        </div>
+                        <div class="goods-grid-box">
+                            <div class="goods-grid-item" :class="{ 'last-item': index === 9 }"
+                                v-for="(item, index) in tvList" :key="item.id">
+                                <div v-if="item.goods_status === 2 || item.goods_status === 4" class="goods_status"
+                                    :class="'goods_status-' + item.goods_status">
+                                    {{ ["", "上架", "预售", "正常", "促销"][item.goods_status] }}
+                                </div>
+                                <a href="javascript:void(0)">
+                                    <div class="figure figure-img">
+                                        <el-image width="160" height="160" :alt="item.goods_name"
+                                            :src="baseURL + item.goods_photo[0]" loading="lazy"
+                                            scroll-container="#app" />
+                                    </div>
+                                    <div class="text-box">
+                                        <h3 class="title">
+                                            {{ item.goods_name }}
+                                        </h3>
+                                        <p class="desc">{{ item.goods_brief_o }}</p>
+                                        <p class="price"><span class="num">{{ item.goods_sale_price
+                                        }}</span>元<span>起</span>
+                                            <del><span class="num">{{ item.goods_price }}</span>元</del>
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <!--浏览更多-->
+                            <a v-if="tvList.length >= 10" href="javascript:void(0)"
+                                class="get-more-info flex flex-row items-center justify-evenly">
+                                <div class="flex flex-col ">
+                                    <span class="text-[22px]">浏览更多</span>
+                                    <span class="text-[12px] text-gray-500">热门</span>
+                                </div>
+                                <div>
+                                    <el-icon color="#ff6700" style="font-size: 36px;">
+                                        <ArrowRight />
+                                    </el-icon>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!--商品列表--笔记本 -->
+                    <div class="home-brick-box base-width m-auto py-2">
+                        <!-- 商品的标题-->
+                        <div class="flex flex-row justify-between h-[50px] items-center">
+                            <h2 class="text-[22px] text-gray-700 font-light">笔记本</h2>
+                            <a href="javascript:void(0)"
+                                class=" transition-all flex items-center hover:text-[#ff6700] ">
+                                查看更多
+                                <el-icon color="#ff6700" style="font-size: 18px;">
+                                    <ArrowRight />
+                                </el-icon>
+                            </a>
+                        </div>
+                        <div class="goods-grid-box">
+                            <div class="goods-grid-item" :class="{ 'last-item': index === 9 }"
+                                v-for="(item, index) in matebookList" :key="item.id">
+                                <div v-if="item.goods_status === 2 || item.goods_status === 4" class="goods_status"
+                                    :class="'goods_status-' + item.goods_status">
+                                    {{ ["", "上架", "预售", "正常", "促销"][item.goods_status] }}
+                                </div>
+                                <a href="javascript:void(0)">
+                                    <div class="figure figure-img">
+                                        <el-image width="160" height="160" :alt="item.goods_name"
+                                            :src="baseURL + item.goods_photo[0]" loading="lazy"
+                                            scroll-container="#app" />
+                                    </div>
+                                    <div class="text-box">
+                                        <h3 class="title">
+                                            {{ item.goods_name }}
+                                        </h3>
+                                        <p class="desc">{{ item.goods_brief_o }}</p>
+                                        <p class="price"><span class="num">{{ item.goods_sale_price
+                                        }}</span>元<span>起</span>
+                                            <del><span class="num">{{ item.goods_price }}</span>元</del>
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <!--浏览更多-->
+                            <a v-if="matebookList.length >= 10" href="javascript:void(0)"
+                                class="get-more-info flex flex-row items-center justify-evenly">
+                                <div class="flex flex-col ">
+                                    <span class="text-[22px]">浏览更多</span>
+                                    <span class="text-[12px] text-gray-500">热门</span>
+                                </div>
+                                <div>
+                                    <ArrowRight class="text-[#ff6700]" style="font-size: 36px" />
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!--商品列表--其它 -->
+                    <div class="home-brick-box base-width m-auto py-2">
+                        <!-- 商品的标题-->
+                        <div class="flex flex-row justify-between h-[50px] items-center">
+                            <h2 class="text-[22px] text-gray-700 font-light">其它</h2>
+                            <a href="javascript:void(0)" class="flex items-center transition-all hover:text-[#ff6700] ">
+                                查看更多
+                                <el-icon color="#ff6700" style="font-size: 18px;">
+                                    <ArrowRight />
+                                </el-icon>
+                            </a>
+                        </div>
+                        <div class="goods-grid-box other-goods-grid-box mb-[10px]">
+                            <div class="goods-grid-item" v-for="(item, index) in otherList" :key="item.id">
+                                <div v-if="item.goods_status === 2 || item.goods_status === 4" class="goods_status"
+                                    :class="'goods_status-' + item.goods_status">
+                                    {{ ["", "上架", "预售", "正常", "促销"][item.goods_status] }}
+                                </div>
+                                <a href="javascript:void(0)">
+                                    <div class="figure figure-img">
+                                        <el-image width="160" height="160" :alt="item.goods_name"
+                                            :src="baseURL + item.goods_photo[0]" loading="lazy"
+                                            scroll-container="#app" />
+                                    </div>
+                                    <div class="text-box">
+                                        <h3 class="title">
+                                            {{ item.goods_name }}
+                                        </h3>
+                                        <p class="desc">{{ item.goods_brief_o }}</p>
+                                        <p class="price"><span class="num">{{ item.goods_sale_price
+                                        }}</span>元<span>起</span>
+                                            <del><span class="num">{{ item.goods_price }}</span>元</del>
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-
-
-
-
         </main-container>
     </page-view>
-
 </template>
 
 
 <script setup>
+import { ArrowRight } from "@element-plus/icons-vue"
 import { ref, reactive, onMounted, inject } from "vue"
 import API from "../Utils/API";
 const baseURL = inject("baseURL");
 
-
+// 电话列表
 const phoneList = ref([]);
+// 电视列表
+const tvList = ref([]);
+// 笔记本列表
+const matebookList = ref([]);
+// 其他商品
+const otherList = ref([]);
 
-
+// 具体数据的列表请求
 const getGoodSList = () => {
     API.goodsInfo.getListByParentId(1).then(result => {
         // console.log(result);
         phoneList.value = result.slice(0, ~~(result.length / 5) * 5);
+    })
+    API.goodsInfo.getListByParentId(2).then(result => {
+        // console.log(result);
+        tvList.value = result.slice(0, ~~(result.length / 5) * 5);
+    })
+    API.goodsInfo.getListByParentId(3).then(result => {
+        // console.log(result);
+        matebookList.value = result.slice(0, ~~(result.length / 5) * 5);
+    })
+    // 其他列表的数据请求
+    Promise.all([
+        API.goodsInfo.getListByParentId(4),
+        API.goodsInfo.getListByParentId(5),
+        API.goodsInfo.getListByParentId(6),
+        API.goodsInfo.getListByParentId(7),
+        API.goodsInfo.getListByParentId(8),
+        API.goodsInfo.getListByParentId(9),
+        API.goodsInfo.getListByParentId(10)
+    ]).then(results => {
+        let Otherarr = [];
+        for (let item of results) {
+            Otherarr.push(...item);
+        }
+        otherList.value = Otherarr.splice(0, ~~(Otherarr.length / 5) * 5)
+    }).catch(error => {
+        console.log(error)
     })
 }
 getGoodSList();
@@ -166,11 +339,10 @@ getGoodSList();
 
 
 
+
 </script>
 
 <style  lang="scss" scoped>
-
-
 .home-hero-sub {
     height: 170px;
     margin-top: 20px;

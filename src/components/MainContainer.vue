@@ -4,9 +4,10 @@
         <main>
             <slot></slot>
         </main>
-        <footer class="bg-white flex justify-center items-center">
-          <foot-bar></foot-bar>
+        <footer>
+            <foot-bar></foot-bar>
         </footer>
+
     </div>
 </template>
 
