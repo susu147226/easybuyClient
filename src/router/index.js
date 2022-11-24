@@ -29,6 +29,11 @@ const router = createRouter({
             name: "CustomInfo",
             component: () => import("../views/customInfo/CustomInfo.vue"),
         },
+        {
+            path: "/SearchMoreInfo",
+            name: "SearchMoreInfo",
+            component: () => import("../views/searchMoreInfoList/SearchMoreInfo.vue"),
+        }
     ]
 });
 

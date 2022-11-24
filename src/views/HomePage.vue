@@ -90,7 +90,8 @@
                         <!-- 商品的标题-->
                         <div class="flex flex-row justify-between h-[50px] items-center">
                             <h2 class="text-[22px] text-gray-700 font-light">手机</h2>
-                            <a href="javascript:void(0)" class="flex items-center transition-all hover:text-[#ff6700]">
+                            <a @click="toSearchMoreInfo(1)" href="javascript:void(0)"
+                                class=" transition-all flex items-center hover:text-[#ff6700] ">
                                 查看更多
                                 <el-icon color="#ff6700" style="font-size: 18px;">
                                     <ArrowRight />
@@ -140,9 +141,9 @@
                     <!--商品列表--电视 -->
                     <div class="home-brick-box base-width m-auto py-2">
                         <!-- 商品的标题-->
-                        <div class="flex flex-row justify-between h-[50px] items-center">
+                        <div class=" flex flex-row justify-between h-[50px] items-center">
                             <h2 class="text-[22px] text-gray-700 font-light">电视</h2>
-                            <a href="javascript:void(0)"
+                            <a @click="toSearchMoreInfo(2)" href="javascript:void(0)"
                                 class=" transition-all flex items-center hover:text-[#ff6700] ">
                                 查看更多
                                 <el-icon color="#ff6700" style="font-size: 18px;">
@@ -195,7 +196,7 @@
                         <!-- 商品的标题-->
                         <div class="flex flex-row justify-between h-[50px] items-center">
                             <h2 class="text-[22px] text-gray-700 font-light">笔记本</h2>
-                            <a href="javascript:void(0)"
+                            <a @click="toSearchMoreInfo(3)" href="javascript:void(0)"
                                 class=" transition-all flex items-center hover:text-[#ff6700] ">
                                 查看更多
                                 <el-icon color="#ff6700" style="font-size: 18px;">
@@ -246,7 +247,7 @@
                         <!-- 商品的标题-->
                         <div class="flex flex-row justify-between h-[50px] items-center">
                             <h2 class="text-[22px] text-gray-700 font-light">其它</h2>
-                            <a href="javascript:void(0)" class="flex items-center transition-all hover:text-[#ff6700] ">
+                            <a @click="toSearchMoreInfo()" href="javascript:void(0)" class="flex items-center transition-all hover:text-[#ff6700] ">
                                 查看更多
                                 <el-icon color="#ff6700" style="font-size: 18px;">
                                     <ArrowRight />
@@ -289,9 +290,12 @@
 <script setup>
 import { ArrowRight } from "@element-plus/icons-vue"
 import { ref, reactive, onMounted, inject } from "vue"
+import {useRouter} from "vue-router"
 import API from "../Utils/API";
 const baseURL = inject("baseURL");
 
+
+const router = useRouter();
 // 电话列表
 const phoneList = ref([]);
 // 电视列表
@@ -335,6 +339,12 @@ const getGoodSList = () => {
     })
 }
 getGoodSList();
+
+
+// 跳转更多商品页
+const toSearchMoreInfo = products_id => {
+  window.open(router.resolve({ name: "SearchMoreInfo", query: { products_id } }).href);
+}
 
 
 

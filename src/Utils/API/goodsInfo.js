@@ -15,6 +15,18 @@ const goodsInfo = {
      */
     getListByParentId(parent_id) {
         return axiosInstance.get(`/goodsInfo/getListByParentId/${parent_id}`);
+    },
+    /**
+     * 根据对应的参数 页码 获取商品页
+     * @param {{pageIndex,goods_name,goods_status,products_id,goods_price_low,goods_price_high}} param0 
+     * @returns {Promise<Object>}
+     */
+    getListByPage({ goods_name, goods_status, products_id, goods_price_low, goods_price_high, pageIndex }) {
+        return axiosInstance.get(`/goodsInfo/getListByPage`, {
+            params: {
+                goods_name, goods_status, products_id, goods_price_low, goods_price_high, pageIndex
+            }
+        })
     }
 }
 
