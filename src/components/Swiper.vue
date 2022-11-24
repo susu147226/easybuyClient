@@ -1,5 +1,5 @@
 <template>
-    <div class="swiper">
+    <div class="swiper" @mouseleave="currentIndex = -1">
         <div class="swiper-box ">
             <div class="h-full">
                 <el-carousel :interval="3000" arrow="hover" height="460px">
