@@ -76,7 +76,7 @@
                 </div>
             </div>
 
-            <div class="bg-gray-100 w-full">
+            <div class="bg-gray-100 w-full" v-loading="isLoading" element-loading-text="数据正在加载...">
                 <div class="w-[1226px] mx-auto">
                     <!--    中间的间隔-->
                     <div class="base-width m-auto h-[120px] my-[22px] home-banner-box">
@@ -124,7 +124,7 @@
                                 </a>
                             </div>
                             <!--浏览更多-->
-                            <a v-if="phoneList.length >= 10" href="javascript:void(0)"
+                            <a v-if="phoneList.length >= 10" href="javascript:void(0)" @click="toSearchMoreInfo(1)"
                                 class="get-more-info flex flex-row items-center justify-evenly">
                                 <div class="flex flex-col ">
                                     <span class="text-[22px]">浏览更多</span>
@@ -177,7 +177,7 @@
                                 </a>
                             </div>
                             <!--浏览更多-->
-                            <a v-if="tvList.length >= 10" href="javascript:void(0)"
+                            <a v-if="tvList.length >= 10" href="javascript:void(0)" @click="toSearchMoreInfo(2)"
                                 class="get-more-info flex flex-row items-center justify-evenly">
                                 <div class="flex flex-col ">
                                     <span class="text-[22px]">浏览更多</span>
@@ -230,9 +230,9 @@
                                 </a>
                             </div>
                             <!--浏览更多-->
-                            <a v-if="matebookList.length >= 10" href="javascript:void(0)"
+                            <a v-if="matebookList.length >= 10" href="javascript:void(0)" @click="toSearchMoreInfo(3)"
                                 class="get-more-info flex flex-row items-center justify-evenly">
-                                <div class="flex flex-col ">
+                                <div class="flex flex-col">
                                     <span class="text-[22px]">浏览更多</span>
                                     <span class="text-[12px] text-gray-500">热门</span>
                                 </div>
@@ -247,7 +247,8 @@
                         <!-- 商品的标题-->
                         <div class="flex flex-row justify-between h-[50px] items-center">
                             <h2 class="text-[22px] text-gray-700 font-light">其它</h2>
-                            <a @click="toSearchMoreInfo()" href="javascript:void(0)" class="flex items-center transition-all hover:text-[#ff6700] ">
+                            <a @click="toSearchMoreInfo()" href="javascript:void(0)"
+                                class="flex items-center transition-all hover:text-[#ff6700] ">
                                 查看更多
                                 <el-icon color="#ff6700" style="font-size: 18px;">
                                     <ArrowRight />
@@ -290,7 +291,7 @@
 <script setup>
 import { ArrowRight } from "@element-plus/icons-vue"
 import { ref, reactive, onMounted, inject } from "vue"
-import {useRouter} from "vue-router"
+import { useRouter } from "vue-router"
 import API from "../Utils/API";
 const baseURL = inject("baseURL");
 
@@ -305,8 +306,10 @@ const matebookList = ref([]);
 // 其他商品
 const otherList = ref([]);
 
+const isLoading = ref(false);
 // 具体数据的列表请求
 const getGoodSList = () => {
+    isLoading.value = true;
     API.goodsInfo.getListByParentId(1).then(result => {
         // console.log(result);
         phoneList.value = result.slice(0, ~~(result.length / 5) * 5);
@@ -336,14 +339,17 @@ const getGoodSList = () => {
         otherList.value = Otherarr.splice(0, ~~(Otherarr.length / 5) * 5)
     }).catch(error => {
         console.log(error)
+    }).finally(() => {
+        isLoading.value = false;
     })
+
 }
 getGoodSList();
 
 
 // 跳转更多商品页
 const toSearchMoreInfo = products_id => {
-  window.open(router.resolve({ name: "SearchMoreInfo", query: { products_id } }).href);
+    window.open(router.resolve({ name: "SearchMoreInfo", query: { products_id } }).href);
 }
 
 

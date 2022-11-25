@@ -1,38 +1,42 @@
 <template>
-    <main-container>
-        <div class="base-width m-auto w-[1226px] ">
-            <div class="goods-grid-box my-5">
-                <div class="goods-grid-item" v-for="(item, index) in queryResultData.listData" :key="item.id">
-                    <div v-if="item.goods_status === 2 || item.goods_status === 4" class="goods_status"
-                        :class="'goods_status-' + item.goods_status">
-                        {{ ["", "上架", "预售", "正常", "促销"][item.goods_status] }}
+    <page-view>
+        <main-container>
+            <div v-loading="isLoading" element-loading-text="数据正在加载..." class="bg-gray-100 py-10 box-border">
+                <div class="base-width m-auto w-[1226px] ">
+                    <div class="goods-grid-box my-5">
+                        <div class="goods-grid-item" v-for="(item, index) in queryResultData.dataList" :key="item.id">
+                            <div v-if="item.goods_status === 2 || item.goods_status === 4" class="goods_status"
+                                :class="'goods_status-' + item.goods_status">
+                                {{ ["", "上架", "预售", "正常", "促销"][item.goods_status] }}
+                            </div>
+                            <a href="javascript:void(0)">
+                                <div class="figure figure-img">
+                                    <el-image width="160" height="160" :alt="item.goods_name"
+                                        :src="baseURL + item.goods_photo[0]" loading="lazy" scroll-container="#app" />
+                                </div>
+                                <div class="text-box">
+                                    <h3 class="title">
+                                        {{ item.goods_name }}
+                                    </h3>
+                                    <p class="desc">{{ item.goods_brief_o }}</p>
+                                    <p class="price"><span class="num">{{ item.goods_sale_price }}</span>元<span>起</span>
+                                        <del><span class="num">{{ item.goods_price }}</span>元</del>
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                    <a href="javascript:void(0)">
-                        <div class="figure figure-img">
-                            <el-image width="160" height="160" :alt="item.goods_name"
-                                :src="baseURL + item.goods_photo[0]" loading="lazy" scroll-container="#app" />
-                        </div>
-                        <div class="text-box">
-                            <h3 class="title">
-                                {{ item.goods_name }}
-                            </h3>
-                            <p class="desc">{{ item.goods_brief_o }}</p>
-                            <p class="price"><span class="num">{{ item.goods_sale_price }}</span>元<span>起</span>
-                                <del><span class="num">{{ item.goods_price }}</span>元</del>
-                            </p>
-                        </div>
-                    </a>
+                    <div class="my-[20px] flex flex-row justify-between" v-if="queryResultData.dataList.length > 0">
+                        <p class="text-gray-500 text-[14px]">当前共第{{ queryItemData.pageIndex }}页，共{{
+                                queryResultData.pageCount
+                        }}页，共{{ queryResultData.totalCount }}条</p>
+                        <el-pagination background layout="prev, pager, next" :current-page="queryItemData.pageIndex"
+                            @current-change="pageChange" :total="queryResultData.totalCount"></el-pagination>
+                    </div>
                 </div>
             </div>
-            <div class="mt-2 flex flex-row justify-between" v-if="queryResultData.dataList.length > 0">
-                <p class="text-gray-500 text-[14px]">当前共第{{ queryItemData.pageIndex }}页，共{{
-                        queryResultData.pageCount
-                }}页，共{{ queryResultData.totalCount }}条</p>
-                <el-pagination background layout="prev, pager, next" :current-page="queryItemData.pageIndex"
-                    @current-change="pageChange" :total="queryResultData.totalCount"></el-pagination>
-            </div>
-        </div>
-    </main-container>
+        </main-container>
+    </page-view>
 </template>
 
 <script setup>
@@ -86,6 +90,7 @@ const queryData = () => {
     queryData();
 })();
 
+// 当页码改变的时候 重新渲染数据
 const pageChange = (page) => {
     queryItemData.pageIndex = page;
     // console.log(page);
