@@ -42,7 +42,7 @@ const adminInfo = {
     },
 
     /**
-     * 
+     * 修改我的密码
      * @param {Object} param0 
      * @returns {Promise<AxiosResponse<any>>}
      */
