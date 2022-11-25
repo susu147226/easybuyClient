@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="searcher-box h-[80px] flex w-[1226px] items-center mx-auto justify-between">
-                    <img src="../assets/img/logo.png" class="h-[55px] cursor-pointer">
+                    <img src="../assets/img/logo.png" @click="$router.push({name:'HomePage'})" class="h-[55px] cursor-pointer">
                     <ul class="search-ul">
                         <li>Xiaomi手机</li>
                         <li>Redmi红米</li>

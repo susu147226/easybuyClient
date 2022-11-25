@@ -1,5 +1,5 @@
 <template>
-    <footer class="flex flex-col justify-between w-[1226px] mx-auto h-[520px] ">
+    <div class="foot-bar flex flex-col justify-between w-[1226px] mx-auto h-[520px]">
         <ul class=" foot-top flex flex-row w-full justify-between items-center my-10 border-b-2 py-10 ">
             <li><a rel="nofollow" href="//www.mi.com/service/quick-repair" target="_blank">预约维修服务</a></li>
             <li><a rel="nofollow" href="//www.mi.com/service/exchange#back" target="_blank">7天无理由退货</a></li>
@@ -152,7 +152,7 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </div>
 </template>
   
 <script  setup>

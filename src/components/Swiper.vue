@@ -1,5 +1,5 @@
 <template>
-    <div class="swiper">
+    <div class="swiper" @mouseleave="currentIndex = -1">
         <div class="swiper-box ">
             <div class="h-full">
                 <el-carousel :interval="3000" arrow="hover" height="460px">
@@ -9,26 +9,58 @@
                 </el-carousel>
             </div>
             <div class="h-full left-menu">
-                <ul class="left-menu-ul">
-                    <li>手机<span>></span></li>
-                    <li>电视<span>></span></li>
-                    <li>笔记本<span>></span></li>
-                    <li>冰箱<span>></span></li>
-                    <li>出行 穿搭<span>></span></li>
-                    <li>移动电源<span>></span></li>
-                    <li>数据线<span>></span></li>
-                    <li>牙刷<span>></span></li>
-                    <li>耳机 音响<span>></span></li>
-                    <li>眼镜 背包<span>></span></li>
+                <ul class="goods-type">
+                    <li v-for="(item, index) in topProductsInfoList" :key="item.id" @mouseenter="currentIndex = index">
+                        <a href="#" @click="toSearchMoreInfo(item.products_id)">{{ item.products_name }}</a>
+                    </li>
                 </ul>
+            </div>
+            <!--    右边展现出的商品列表-->
+            <div class="goods-list" v-for="(item, index) in topProductsInfoList" :key="item.id"
+                v-show="currentIndex === index" @mouseleave="currentIndex = -1">
+                <div class="goods-item" @click="toGoodsDetail(g_item)" v-for="g_item in item.goodsList.slice(0, 20)"
+                    :key="g_item.id">
+                    <img :src="baseURL + g_item.goods_photo[0]" class="goods-img" alt="">
+                    <span>{{ g_item.goods_name }}</span>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
+import { ref, inject } from "vue";
+import API from "../Utils/API";
+import { useRouter } from "vue-router"
 
 
+const router = useRouter();
+const baseURL = inject("baseURL");
+// 获取分类产品
+const topProductsInfoList = ref([])
+
+
+const getTopProductsInfoListAndGoods = () => {
+    API.productsInfo.getTopProductsInfoListAndGoods()
+        .then(result => {
+            // console.log(result);
+            topProductsInfoList.value = result;
+        })
+}
+getTopProductsInfoListAndGoods();
+
+
+// 控制右边的菜单的展出
+let currentIndex = ref(-1)
+
+const toGoodsDetail = item => {
+    window.open(router.resolve({ name: "goodsDetail", params: { id: item.id } }).href);
+}
+
+// 跳转更多商品页
+const toSearchMoreInfo = products_id => {
+    window.open(router.resolve({ name: "SearchMoreInfo", query: { products_id } }).href);
+}
 
 const imgList = [
     {
@@ -60,26 +92,80 @@ const imgList = [
 
     @apply h-[460px];
 
-
-
-    >.left-menu {
-        width: 234px;
-        height: 100%;
+    .goods-type {
         position: absolute;
         left: 0;
         top: 0;
-        background-color: rgba(126, 126, 126, 0.6);
+        background-color: rgba(0, 0, 0, .5);
+        padding: 20px 0;
+        width: 234px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
         z-index: 2;
 
-        .left-menu-ul {
-            @apply box-border py-20 text-[#f1f1f1] text-[14px];
+        >li {
+            height: 40px;
+            line-height: 40px;
+            padding: 0 15px;
+            color: #fff;
+            font-size: 14px;
+            @apply flex flex-row items-center;
 
-            >li {
-                @apply box-border px-10 h-[42px] flex flex-row items-center justify-between;
+            &:hover {
+                background-color: #ff6700;
             }
 
-            >li:hover {
-                background-color: #ff6700;
+            a {
+                flex: 1;
+            }
+
+            &::after {
+                content: ">";
+                // font-weight: bold;
+                font-size: 16px;
+            }
+        }
+    }
+
+    .goods-list {
+        position: absolute;
+        left: 234px;
+        top: 0;
+        right: 0;
+        height: 100%;
+        overflow: hidden;
+        z-index: 2;
+        background-color: #ffffff;
+        display: grid;
+        grid-template-rows: repeat(6, 1fr);
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-flow: column;
+        align-self: center;
+        width: min-content;
+        box-shadow: 0 0 10px lightgray;
+
+        .goods-item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0 10px;
+            width: 265px;
+            height: 76px;
+            color: black;
+            line-height: 1.7;
+            font-size: 14px;
+
+            &:hover {
+                color: #ff6700;
+                cursor: pointer;
+            }
+
+            .goods-img {
+                width: 40px;
+                height: 40px;
+                margin: 0 20px;
             }
         }
     }
