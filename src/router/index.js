@@ -35,9 +35,14 @@ const router = createRouter({
             component: () => import("../views/searchMoreInfoList/SearchMoreInfo.vue"),
         },
         {
-            path:"/goodsDetail/:id",
-            name:"goodsDetail",
-            component:()=>import("../views/goodsDetail/goodsDetail.vue")
+            path:"/GoodsDetail/:id",
+            name:"GoodsDetail",
+            component:()=>import("../views/goodsDetail/GoodsDetail.vue")
+        },
+        {
+            path:"/CustomCenter",
+            name:"CustomCenter",
+            component:()=>import("../views/customInfo/CustomCenter.vue")
         }
     ]
 });

@@ -120,7 +120,7 @@
 import goodsDetailSwiper from "./goodsDetailSwiper.vue";
 import { useRoute, useRouter } from "vue-router";
 import { computed, ref } from "vue";
-import { ElMessageBox } from "element-plus";
+import { ElMessageBox, ElMessage } from "element-plus";
 import { Location, ShoppingCartFull, Pouring, Sunny } from "@element-plus/icons-vue";
 import API from "../../Utils/API";
 import { mainStore } from "../../store/index";
@@ -184,7 +184,7 @@ const submitAddShopCar = () => {
         // 此时说明用户已经登录
         isLoading.value = true;
         loadingText.value = "正在加入购物车..."
-        API.shopCarInfo.addToShopCar({ goods_id: goodsDetailData.value.id ,custom_id:goodsDetailData.value.products_id})
+        API.shopCarInfo.addToShopCar({ goods_id: goodsDetailData.value.id, custom_id: goodsDetailData.value.products_id })
             .then(result => {
                 console.log(11111);
             }).finally(() => {
@@ -198,6 +198,10 @@ const submitAddShopCar = () => {
             cancelButtonText: "算了等一会",
             showCancelButton: true,
         }).then(result => {
+            ElMessage({
+                type: "success",
+                message: "操作成功"
+            })
             router.push({
                 name: 'Login',
                 query: {
@@ -205,6 +209,7 @@ const submitAddShopCar = () => {
                 }
             })
         }).catch(() => {
+            
         });
     }
 }

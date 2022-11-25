@@ -1,10 +1,9 @@
 <template>
-    <page-view>
-        <title-bar></title-bar>
-        <div class="custom-menu">
-            <div class="item-menu flex flex-row">
+    <div class="custom-menu">
+        <div class="item-menu flex flex-col">
+            <div class="title"><span class="backHome">首页</span>/个人中心</div>
+            <div class="flex flex-row">
                 <div class="flex flex-col">
-                    <span class="title">首页/个人中心</span>
                     <ul class="left-menu">
                         <li>个人中心</li>
                         <li>收货地址</li>
@@ -14,13 +13,12 @@
                     </ul>
                 </div>
 
-                <div>
+                <div class="flex-1 overflow-auto bg-white ml-20">
                     <slot></slot>
                 </div>
             </div>
         </div>
-        <foot-bar></foot-bar>
-    </page-view>
+    </div>
 </template>
 <script setup>
 
@@ -35,9 +33,13 @@
     }
 
     .title {
-        @apply mt-10 mb-10;
+        @apply my-10;
         font-size: 14px;
         color: #6b86b2;
+        .backHome:hover{
+            cursor: pointer;
+            color: #ff6700;
+        }
     }
 
     .left-menu {
@@ -49,7 +51,7 @@
         }
 
         li:hover {
-            color: #ffb452;
+            color: #ff6700;
             cursor: pointer;
         }
     }

@@ -4,7 +4,7 @@
             <div v-loading="isLoading" element-loading-text="数据正在加载..." class="bg-gray-100 py-10 box-border">
                 <div class="base-width m-auto w-[1226px] ">
                     <div class="goods-grid-box my-5">
-                        <div class="goods-grid-item" v-for="(item, index) in queryResultData.dataList" :key="item.id">
+                        <div class="goods-grid-item" @click="toGoodsDetail(item)" v-for="(item, index) in queryResultData.dataList" :key="item.id">
                             <div v-if="item.goods_status === 2 || item.goods_status === 4" class="goods_status"
                                 :class="'goods_status-' + item.goods_status">
                                 {{ ["", "上架", "预售", "正常", "促销"][item.goods_status] }}
@@ -97,6 +97,11 @@ const pageChange = (page) => {
     queryData();
 }
 
+
+// 跳转到商品详情页
+const toGoodsDetail = (item) => {
+    window.open(router.resolve({ name: "GoodsDetail", params: { id: item.id } }).href);
+}
 </script>
 
 

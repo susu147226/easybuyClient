@@ -24,7 +24,7 @@
                 <router-link :to="{ name: 'Register' }">注册</router-link>
               </template>
               <template v-else>
-                <router-link :to="{ name: 'Login' }">欢迎登录：{{ loginClientInfo.custom_realName }}</router-link>
+                <router-link :to="{ name: 'CustomCenter' }">欢迎登录：{{ loginClientInfo.custom_realName }}</router-link>
                 <a href="javascript:void(0)" @click="clientLogOut">退出登录</a>
               </template>
               <a href="#">消息通知</a>
@@ -58,8 +58,9 @@
 <script setup>
 import { mainStore } from "../store"
 import { storeToRefs } from "pinia"
-import { ElMessageBox } from "element-plus";
-
+import { ElMessageBox, ElMessage } from "element-plus";
+import { useRouter } from "vue-router"
+const router = useRouter();
 const store = mainStore();
 const { loginClientInfo } = storeToRefs(store);
 
@@ -69,12 +70,20 @@ const clientLogOut = () => {
   ElMessageBox.confirm("确定要退出登录吗？", "询问", {
     confirmButtonText: "确定",
     cancelButtonText: "点错了",
+    type: "warning",
   })
     .then(() => {
       store.logOut();
+      ElMessage({
+        type: "success",
+        message: "操作成功"
+      })
     })
     .catch(() => {
-      
+      ElMessage({
+        type: "warning",
+        message: "已取消操作"
+      })
     })
 }
 </script>
@@ -86,7 +95,7 @@ const clientLogOut = () => {
   @apply flex items-center flex-row text-[12px] text-[#b0b0b0];
 
   >li {
-    @apply border-0 border-r-2 border-solid border-[#292929] mr-[10px] box-border px-6 cursor-pointer;
+    @apply border-0 border-r-2 border-solid border-[#292929] mr-5 box-border px-5 cursor-pointer;
   }
 
   >li:hover {
@@ -113,7 +122,7 @@ const clientLogOut = () => {
 
   .shop-car {
     background-color: #424242;
-    @apply h-full flex flex-row items-center justify-center px-[15px] text-[12px];
+    @apply h-full flex flex-row items-center justify-center px-[16px] text-[12px];
 
     &:hover {
       background-color: #fff;
