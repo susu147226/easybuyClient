@@ -27,6 +27,14 @@ const goodsInfo = {
                 goods_name, goods_status, products_id, goods_price_low, goods_price_high, pageIndex
             }
         })
+    },
+    /**
+     * 根据id查询商品详情
+     * @param {id} id 
+     * @returns {Promise<Object>}
+     */
+    findById(id){
+        return axiosInstance.get(`/goodsInfo/findById/${id}`);
     }
 }
 

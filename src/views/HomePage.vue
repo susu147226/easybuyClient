@@ -79,7 +79,7 @@
             <div class="bg-gray-100 w-full" v-loading="isLoading" element-loading-text="数据正在加载...">
                 <div class="w-[1226px] mx-auto">
                     <!--    中间的间隔-->
-                    <div class="base-width m-auto h-[120px] my-[22px] home-banner-box">
+                    <div class="base-width m-auto h-[120px] my-[22px] box-border py-20 home-banner-box">
                         <a href="javascript:void(0)">
                             <img alt="test" width="1226" height="120"
                                 src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/0e2b43800d3e1ef40470ac04b3e0140b.jpg?thumb=1&amp;w=1226&amp;h=120&amp;f=webp&amp;q=90">
@@ -100,7 +100,7 @@
                         </div>
                         <div class="goods-grid-box">
                             <div class="goods-grid-item" :class="{ 'last-item': index === 9 }"
-                                v-for="(item, index) in phoneList" :key="item.id">
+                                @click="toGoodsDetail(item)" v-for="(item, index) in phoneList" :key="item.id">
                                 <div v-if="item.goods_status === 2 || item.goods_status === 4" class="goods_status"
                                     :class="'goods_status-' + item.goods_status">
                                     {{ ["", "上架", "预售", "正常", "促销"][item.goods_status] }}
@@ -152,8 +152,8 @@
                             </a>
                         </div>
                         <div class="goods-grid-box">
-                            <div class="goods-grid-item" :class="{ 'last-item': index === 9 }"
-                                v-for="(item, index) in tvList" :key="item.id">
+                            <div class="goods-grid-item" @click="toGoodsDetail(item)"
+                                :class="{ 'last-item': index === 9 }" v-for="(item, index) in tvList" :key="item.id">
                                 <div v-if="item.goods_status === 2 || item.goods_status === 4" class="goods_status"
                                     :class="'goods_status-' + item.goods_status">
                                     {{ ["", "上架", "预售", "正常", "促销"][item.goods_status] }}
@@ -205,8 +205,9 @@
                             </a>
                         </div>
                         <div class="goods-grid-box">
-                            <div class="goods-grid-item" :class="{ 'last-item': index === 9 }"
-                                v-for="(item, index) in matebookList" :key="item.id">
+                            <div class="goods-grid-item" @click="toGoodsDetail(item)"
+                                :class="{ 'last-item': index === 9 }" v-for="(item, index) in matebookList"
+                                :key="item.id">
                                 <div v-if="item.goods_status === 2 || item.goods_status === 4" class="goods_status"
                                     :class="'goods_status-' + item.goods_status">
                                     {{ ["", "上架", "预售", "正常", "促销"][item.goods_status] }}
@@ -256,7 +257,8 @@
                             </a>
                         </div>
                         <div class="goods-grid-box other-goods-grid-box mb-[10px]">
-                            <div class="goods-grid-item" v-for="(item, index) in otherList" :key="item.id">
+                            <div class="goods-grid-item" @click="toGoodsDetail(item)" v-for="(item, index) in otherList"
+                                :key="item.id">
                                 <div v-if="item.goods_status === 2 || item.goods_status === 4" class="goods_status"
                                     :class="'goods_status-' + item.goods_status">
                                     {{ ["", "上架", "预售", "正常", "促销"][item.goods_status] }}
@@ -346,6 +348,10 @@ const getGoodSList = () => {
 }
 getGoodSList();
 
+// 跳转到商品详情页
+const toGoodsDetail = (item) => {
+    window.open(router.resolve({ name: "goodsDetail", params: { id: item.id } }).href);
+}
 
 // 跳转更多商品页
 const toSearchMoreInfo = products_id => {

@@ -20,6 +20,8 @@ import zhCn from "element-plus/dist/locale/zh-cn.mjs"
 import 'element-plus/dist/index.css';
 
 
+
+
 // 导入animatecss样式
 import "animate.css"
 

@@ -3,6 +3,9 @@ module.exports = {
   content: ['./index.html', "./src/*.{vue,js}", './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      colors:{
+        primaryColor:"#ff6700"
+      },
       margin: (() => {
         let obj = {};
         for (let i = 1; i <= 20; i++) {

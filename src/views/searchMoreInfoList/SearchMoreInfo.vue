@@ -26,7 +26,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="my-[20px] flex flex-row justify-between" v-if="queryResultData.dataList.length > 0">
+                    <div class="my-[20px] flex flex-row justify-between items-center" v-if="queryResultData.dataList.length > 0">
                         <p class="text-gray-500 text-[14px]">当前共第{{ queryItemData.pageIndex }}页，共{{
                                 queryResultData.pageCount
                         }}页，共{{ queryResultData.totalCount }}条</p>

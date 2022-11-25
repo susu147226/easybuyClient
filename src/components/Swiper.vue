@@ -11,14 +11,15 @@
             <div class="h-full left-menu">
                 <ul class="goods-type">
                     <li v-for="(item, index) in topProductsInfoList" :key="item.id" @mouseenter="currentIndex = index">
-                        <a href="#">{{ item.products_name }}</a>
+                        <a href="#" @click="toSearchMoreInfo(item.products_id)">{{ item.products_name }}</a>
                     </li>
                 </ul>
             </div>
             <!--    右边展现出的商品列表-->
             <div class="goods-list" v-for="(item, index) in topProductsInfoList" :key="item.id"
                 v-show="currentIndex === index" @mouseleave="currentIndex = -1">
-                <div class="goods-item" v-for="g_item in item.goodsList.slice(0, 20)" :key="g_item.id">
+                <div class="goods-item" @click="toGoodsDetail(g_item)" v-for="g_item in item.goodsList.slice(0, 20)"
+                    :key="g_item.id">
                     <img :src="baseURL + g_item.goods_photo[0]" class="goods-img" alt="">
                     <span>{{ g_item.goods_name }}</span>
                 </div>
@@ -30,8 +31,10 @@
 <script setup>
 import { ref, inject } from "vue";
 import API from "../Utils/API";
+import { useRouter } from "vue-router"
 
 
+const router = useRouter();
 const baseURL = inject("baseURL");
 // 获取分类产品
 const topProductsInfoList = ref([])
@@ -46,7 +49,18 @@ const getTopProductsInfoListAndGoods = () => {
 }
 getTopProductsInfoListAndGoods();
 
+
+// 控制右边的菜单的展出
 let currentIndex = ref(-1)
+
+const toGoodsDetail = item => {
+    window.open(router.resolve({ name: "goodsDetail", params: { id: item.id } }).href);
+}
+
+// 跳转更多商品页
+const toSearchMoreInfo = products_id => {
+    window.open(router.resolve({ name: "SearchMoreInfo", query: { products_id } }).href);
+}
 
 const imgList = [
     {
