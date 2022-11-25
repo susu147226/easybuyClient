@@ -25,9 +25,9 @@ const router = createRouter({
             component: () => import("../views/Register.vue"),
         },
         {
-            path: "/CustomInfo",
-            name: "CustomInfo",
-            component: () => import("../views/customInfo/CustomInfo.vue"),
+            path: "/ShopCarInfoList",
+            name: "ShopCarInfoList",
+            component: () => import("../views/shopCarInfo/ShopCarInfoList.vue"),
         },
     ]
 });

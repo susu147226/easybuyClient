@@ -44,7 +44,7 @@
                             </el-form-item>
                             <el-form-item label="用户头像" prop="custom_photo">
                                 <el-upload v-loading="isUploadingImg" element-loading-text="正在上传图片" name="custom_photo"
-                                    :headers="{ softeem_clietn_token: store.token }"
+                                    :headers="{ easybuy_clietn_token: store.token }"
                                     class="w-full h-[100px] border border-dashed border-gray-200 flex flex-row justify-center items-center"
                                     :before-upload="beforeUpload" :show-file-list="false" :on-success="uploadSuccess">
                                     <img v-if="customInfoData.custom_photo" :src="baseURL + customInfoData.custom_photo"

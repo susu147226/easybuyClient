@@ -34,6 +34,7 @@ import PageLogin from "./components/PageLogin.vue";
 import TitleBar from "./components/TitleBar.vue"
 import Swiper from "./components/Swiper.vue";
 import CustomMenu from "./components/CustomMenu.vue";
+import ShopCar from "./components/ShopCar.vue";
 
 const app = createApp(App)
 
@@ -59,6 +60,7 @@ app.component("title-bar", TitleBar);
 app.component("foot-bar", FootBar);
 app.component("swiper", Swiper);
 app.component("custom-menu", CustomMenu);
+app.component("shop-car", ShopCar);
 
 
 // 使用大菠萝

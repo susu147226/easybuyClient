@@ -4,7 +4,7 @@
         <div class="custom-menu">
             <div class="item-menu flex flex-row">
                 <div class="flex flex-col">
-                    <span class="title block">首页/个人中心</span>
+                    <span class="title">首页/个人中心</span>
                     <ul class="left-menu">
                         <li>个人中心</li>
                         <li>收货地址</li>
