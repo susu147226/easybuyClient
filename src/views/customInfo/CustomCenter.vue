@@ -11,12 +11,22 @@
 </template>
 
 <script setup>
+import { computed, ref, inject } from "vue";
+import { mainStore } from "../../store/index";
+const baseURL = inject("baseURL");
+
+const store = mainStore();
+const loginClientInfo = store.loginClientInfo;
+
+
+console.log(loginClientInfo);
+
 
 </script>
 
 
 <style lang="scss" scoped>
-.right-page {
-    @apply border border-solid border-black h-[600px];
+.right-page{
+    @apply  border border-solid border-black;
 }
 </style>

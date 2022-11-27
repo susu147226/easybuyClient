@@ -40,11 +40,12 @@ const router = createRouter({
             component: () => import("../views/searchMoreInfoList/SearchMoreInfo.vue"),
         },
         {
-            path:"/GoodsDetail/:id",
-            name:"GoodsDetail",
-            component:()=>import("../views/goodsDetail/GoodsDetail.vue")
+            path: "/GoodsDetail/:id",
+            name: "GoodsDetail",
+            component: () => import("../views/goodsDetail/GoodsDetail.vue")
         },
         {
+<<<<<<< HEAD
             path:"/CustomCenter",
             name:"CustomCenter",
             component:()=>import("../views/customInfo/CustomCenter.vue"),
@@ -60,6 +61,21 @@ const router = createRouter({
                     component:()=>import("../views/customInfo/ChangePwd.vue")
                 },
             ]
+=======
+            path: "/CustomCenter",
+            name: "CustomCenter",
+            component: () => import("../views/customInfo/CustomCenter.vue")
+        },
+        {
+            path: "/AddressInfoList",
+            name: "AddressInfoList",
+            component: () => import("../views/customInfo/AddressInfoList.vue")
+        },
+        {
+            path: "/OrderInfoList",
+            name: "OrderInfoList",
+            component: () => import("../views/customInfo/OrderInfoList.vue")
+>>>>>>> 888edf3400ec4c6c1f8680ab686966ad3fe29ff8
         }
     ]
 });
