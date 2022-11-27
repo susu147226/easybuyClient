@@ -35,14 +35,24 @@ const router = createRouter({
             component: () => import("../views/searchMoreInfoList/SearchMoreInfo.vue"),
         },
         {
-            path:"/GoodsDetail/:id",
-            name:"GoodsDetail",
-            component:()=>import("../views/goodsDetail/GoodsDetail.vue")
+            path: "/GoodsDetail/:id",
+            name: "GoodsDetail",
+            component: () => import("../views/goodsDetail/GoodsDetail.vue")
         },
         {
-            path:"/CustomCenter",
-            name:"CustomCenter",
-            component:()=>import("../views/customInfo/CustomCenter.vue")
+            path: "/CustomCenter",
+            name: "CustomCenter",
+            component: () => import("../views/customInfo/CustomCenter.vue")
+        },
+        {
+            path: "/AddressInfoList",
+            name: "AddressInfoList",
+            component: () => import("../views/customInfo/AddressInfoList.vue")
+        },
+        {
+            path: "/OrderInfoList",
+            name: "OrderInfoList",
+            component: () => import("../views/customInfo/OrderInfoList.vue")
         }
     ]
 });
