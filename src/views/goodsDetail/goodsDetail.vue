@@ -141,7 +141,7 @@ const findById = (id) => {
     isLoading.value = true;
     API.goodsInfo.findById(id)
         .then(result => {
-            console.log(result);
+            // console.log(result);
             result.goods_desc = JSON.parse(result.goods_desc);
             result.goods_photo = JSON.parse(result.goods_photo);
             goodsDetailData.value = result;
@@ -186,7 +186,8 @@ const submitAddShopCar = () => {
         loadingText.value = "正在加入购物车..."
         API.shopCarInfo.addToShopCar({ goods_id: goodsDetailData.value.id, custom_id: goodsDetailData.value.products_id })
             .then(result => {
-                console.log(11111);
+                // console.log(result);
+                router.replace({ name: "AddToShopResult", params: { id: goodsDetailData.value.id } })
             }).finally(() => {
                 isLoading.value = false;
             })
@@ -209,7 +210,7 @@ const submitAddShopCar = () => {
                 }
             })
         }).catch(() => {
-            
+
         });
     }
 }

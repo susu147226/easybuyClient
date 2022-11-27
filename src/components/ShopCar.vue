@@ -1,6 +1,6 @@
 <template>
     <page-view>
-        <div class="py-6 border-b-2 border-solid my-shop-car-header">
+        <div class="py-6 border-b-2 border-solid my-shop-car-header w-[1226px] m-auto">
             <div class="base-width m-auto flex flex-row items-end">
                 <img src="../assets/img/Logo.png" class="w-[56px] h-[56px] cursor-pointer"
                     @click="$router.replace({ name: 'HomePage' })" alt="">
