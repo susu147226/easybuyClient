@@ -6,10 +6,10 @@ const orderInfo = {
      * @param {*} param0 
      * @returns 
      */
-    getListByPage({ pageIndex }) {
+    getListByPage({ pageIndex, order_status }) {
         return axiosInstance.get(`/orderInfo/getListByPage`, {
             params: {
-                pageIndex
+                pageIndex, order_status
             }
         })
     }

@@ -12,6 +12,15 @@ const addressInfo = {
                 pageIndex
             }
         })
+    },
+
+    /**
+   * 删除一个地址
+   * @param {*} param0 
+   * @returns 
+   */
+    deleteById({ id }) {
+        return axiosInstance.delete(`/addressInfo/deleteById/${id}`)
     }
 }
 

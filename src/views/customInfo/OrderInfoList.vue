@@ -19,7 +19,13 @@
                     <el-card class="box-card">
                         <template #header>
                             <div class="card-header">
-                                <span>未付款</span><span class="text-[12px] text-[#ff6a00] ml-5">去付款</span>
+                                <span v-if="item.order_status === 0">未付款</span>
+                                <span v-if="item.order_status === 1">已付款</span>
+                                <span v-if="item.order_status === 2">已发货</span>
+                                <span v-if="item.order_status === 3">已签收</span>
+
+                                <span v-if="item.order_status === 0"
+                                    class="text-gray-500 text-[12px] cursor-pointer text-red-500 hover:underline">去付款</span>
                                 <div class="flex flex-row justify-between items-center">
                                     <p><span>{{ item.order_submission_time }}</span>
                                         <span>&nbsp;|&nbsp;</span>
@@ -28,7 +34,10 @@
                                         <span>订单号: <span>{{ item.id }}</span>
                                             <span>&nbsp;|&nbsp;</span>
                                             <span>在线支付</span>
-                                            <span>{{ item.order_pay_type == 1 ? '【支付宝】' : '【微信】' }}</span>
+                                            <span v-if="item.order_pay_type === 0">支付宝</span>
+                                            <span v-if="item.order_pay_type === 1">微信</span>
+                                            <span v-if="item.order_pay_type === 2">银行卡</span>
+                                            <span v-if="item.order_pay_type === 3">货到付款</span>
                                         </span>
                                     </p>
                                     <span>订单金额: <span class="text-[22px]">{{
@@ -74,7 +83,7 @@
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, watch } from "vue";
 import { mainStore } from "../../store/index";
 import { InfoFilled } from "@element-plus/icons-vue";
 import API from "../../Utils/API";
@@ -107,7 +116,11 @@ const currentChange = (index) => {
     queryData();
 }
 
-
+//监听
+watch(() => queryFormData.order_status, (newValue, oldValue) => {
+    queryFormData.pageIndex = 1;
+    queryData();
+});
 
 const queryData = () => {
     isLoading.value = true;

@@ -41,8 +41,8 @@
 
                         <el-table-column label="操作" width="130px">
                             <template #default="{ row }">
-                                <el-popconfirm confirm-button-text="确定" cancel-button-text="取消" :icon="InfoFilled"
-                                    icon-color="#626AEF" title="确定删除吗?">
+                                <el-popconfirm @confirm="deleteCurrentAddress(row.id)" confirm-button-text="确定"
+                                    cancel-button-text="取消" :icon="InfoFilled" icon-color="#626AEF" title="确定删除吗?">
                                     <template #reference>
                                         <el-button type="danger" size="small">删除
                                         </el-button>
@@ -75,6 +75,8 @@ import { mainStore } from "../../store/index";
 import { InfoFilled } from "@element-plus/icons-vue";
 import API from "../../Utils/API";
 import { onMounted, inject } from "vue";
+import { ElMessage } from 'element-plus'
+
 
 // const baseURL = inject("baseURL");
 
@@ -113,6 +115,16 @@ const currentChange = (index) => {
     queryData();
 }
 
+
+const deleteCurrentAddress = async (id) => {
+    console.log(id);
+    let result = await API.addressInfo.deleteById({ id: id });
+    queryData();
+    ElMessage({
+        message: '删除成功',
+        type: 'success',
+    })
+}
 
 </script>
 
