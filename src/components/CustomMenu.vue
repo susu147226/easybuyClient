@@ -1,15 +1,16 @@
 <template>
     <div class="custom-menu">
         <div class="item-menu flex flex-col">
-            <div class="title"><span class="backHome" @click="$router.replace({name:'HomePage'})">首页</span>/个人中心</div>
+            <div class="title"><span class="backHome" @click="$router.replace({ name: 'HomePage' })">首页</span>/个人中心
+            </div>
             <div class="flex flex-row">
                 <div class="flex flex-col">
-                    <ul class="left-menu">
-                        <li>个人中心</li>
+                    <ul class="left-menu text-[14px]">
+                        <li @click="$router.push({ name: 'CustomInfo' })">个人中心</li>
                         <li>收货地址</li>
                         <li>订单列表</li>
-                        <li>修改密码</li>
-                        <li>我的购物车</li>
+                        <li @click="$router.push({ name: 'ChangePwd' })">修改密码</li>
+                        <li @click="$router.push({ name: 'MyShopCarList' })">我的购物车</li>
                     </ul>
                 </div>
 
@@ -36,7 +37,8 @@
         @apply my-10;
         font-size: 14px;
         color: #6b86b2;
-        .backHome:hover{
+
+        .backHome:hover {
             cursor: pointer;
             color: #ff6700;
         }

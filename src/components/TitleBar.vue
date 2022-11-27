@@ -24,12 +24,12 @@
                 <router-link :to="{ name: 'Register' }">注册</router-link>
               </template>
               <template v-else>
-                <router-link :to="{ name: 'CustomCenter' }">欢迎登录：{{ loginClientInfo.custom_realName }}</router-link>
+                <router-link :to="{ name: 'CustomInfo' }">欢迎登录：{{ loginClientInfo.custom_realName }}</router-link>
                 <a href="javascript:void(0)" @click="clientLogOut">退出登录</a>
               </template>
               <a href="#">消息通知</a>
               <div class="relative h-full z-10 group">
-                <router-link :to="{ name: 'Login' }" class="shop-car">购物车({{ shopCarTotalCount }})
+                <router-link :to="{ name: 'MyShopCarList' }" class="shop-car">购物车({{ shopCarTotalCount }})
                 </router-link>
                 <ul class="absolute right-0 bg-white top-[40px] w-[200px] shadow-2xl hidden group-hover:block">
                   <li v-for="item in myShopCarList" :key="item.id"
@@ -58,7 +58,8 @@
           </ul>
           <div class="search-box">
             <input type="text" placeholder="小米手机" v-model="keyword">
-            <div class="query-btn" @click="$router.replace({ name: 'SearchMoreInfo', query: { keyword: keyword } })">搜索</div>
+            <div class="query-btn" @click="$router.replace({ name: 'SearchMoreInfo', query: { keyword: keyword } })">搜索
+            </div>
           </div>
         </div>
       </div>
@@ -78,6 +79,7 @@ const store = mainStore();
 const { loginClientInfo } = storeToRefs(store);
 
 const baseURL = inject("baseURL");
+
 
 // 退出登录操作
 const clientLogOut = () => {
@@ -109,8 +111,9 @@ const getMyShopCarList = () => {
       // console.log(result);
       result.forEach(item => {
         // console.log(item.goodsInfo.goods_photo);
-        item.goodsInfo.goods_photo = JSON.parse(item.goodsInfo.goods_photo);
+        item.goodsInfo.goods_photo = JSON.parse(item.goodsInfo.goods_photo)
       })
+      // console.log(result.goodsInfo.goods_photo);
       myShopCarList.value = result;
     })
     .catch(error => {

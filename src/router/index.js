@@ -47,7 +47,19 @@ const router = createRouter({
         {
             path:"/CustomCenter",
             name:"CustomCenter",
-            component:()=>import("../views/customInfo/CustomCenter.vue")
+            component:()=>import("../views/customInfo/CustomCenter.vue"),
+            children:[
+                {
+                    path:"CustomInfo",
+                    name:"CustomInfo",
+                    component:()=>import("../views/customInfo/CustomInfo.vue")
+                },
+                {
+                    path:"ChangePwd",
+                    name:"ChangePwd",
+                    component:()=>import("../views/customInfo/ChangePwd.vue")
+                },
+            ]
         }
     ]
 });
