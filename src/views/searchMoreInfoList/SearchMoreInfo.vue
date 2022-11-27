@@ -68,7 +68,7 @@ const queryData = () => {
     isLoading.value = true;
     API.goodsInfo.getListByPage(queryItemData)
         .then(result => {
-            console.log(result);
+            // console.log(result);
             result.listData.forEach(item => {
                 item.goods_photo = JSON.parse(item.goods_photo);
             })

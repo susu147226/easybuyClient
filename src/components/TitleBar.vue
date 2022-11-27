@@ -28,7 +28,18 @@
                 <a href="javascript:void(0)" @click="clientLogOut">退出登录</a>
               </template>
               <a href="#">消息通知</a>
-              <div class="shop-car">购物车<span>(0)</span></div>
+              <div class="relative h-full z-10 group">
+                <router-link :to="{ name: 'Login' }" class="shop-car">购物车({{ shopCarTotalCount }})
+                </router-link>
+                <ul class="absolute right-0 bg-white top-[40px] w-[200px] shadow-2xl hidden group-hover:block">
+                  <li v-for="item in myShopCarList" :key="item.id"
+                    class="flex flex-row items-center text-[12px] h-[50px] box-border p-10 border-b border-solid border-gray-200 cursor-pointer hover:text-red-400">
+                    <img :src="baseURL + item.goodsInfo.goods_photo[0]" class="w-[40px] h-[40px] object-contain" alt="">
+                    <span class="shop-car-goods_name">{{ item.goodsInfo.goods_name }}</span>
+                    <span>[{{ item.car_goods_num }}]</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -46,8 +57,8 @@
             <li>社区</li>
           </ul>
           <div class="search-box">
-            <input type="text" placeholder="小米手机">
-            <div>搜索</div>
+            <input type="text" placeholder="小米手机" v-model="keyword">
+            <div class="query-btn" @click="$router.replace({ name: 'SearchMoreInfo', query: { keyword: keyword } })">搜索</div>
           </div>
         </div>
       </div>
@@ -60,12 +71,15 @@ import { mainStore } from "../store"
 import { storeToRefs } from "pinia"
 import { ElMessageBox, ElMessage } from "element-plus";
 import { useRouter } from "vue-router"
+import { ref, reactive, computed, onMounted, inject } from "vue"
+import API from "../Utils/API";
 const router = useRouter();
 const store = mainStore();
 const { loginClientInfo } = storeToRefs(store);
 
+const baseURL = inject("baseURL");
 
-
+// 退出登录操作
 const clientLogOut = () => {
   ElMessageBox.confirm("确定要退出登录吗？", "询问", {
     confirmButtonText: "确定",
@@ -86,6 +100,47 @@ const clientLogOut = () => {
       })
     })
 }
+// 我的购物车列表
+const myShopCarList = ref([]);
+
+const getMyShopCarList = () => {
+  API.shopCarInfo.getMyShopCarList()
+    .then(result => {
+      // console.log(result);
+      result.forEach(item => {
+        // console.log(item.goodsInfo.goods_photo);
+        item.goodsInfo.goods_photo = JSON.parse(item.goodsInfo.goods_photo);
+      })
+      myShopCarList.value = result;
+    })
+    .catch(error => {
+      console.log("获取购物车列表失败", error);
+    })
+}
+
+const shopCarTotalCount = computed(() => {
+  let totalCount = 0;
+  myShopCarList.value.forEach(item => {
+    totalCount += item.car_goods_num;
+  })
+  return totalCount;
+})
+
+onMounted(() => {
+  if (loginClientInfo) {
+    getMyShopCarList();
+  }
+})
+
+
+
+
+/**
+ * 搜索功能
+ */
+const keyword = ref("");
+
+
 </script>
 
 
@@ -129,13 +184,13 @@ const clientLogOut = () => {
     }
   }
 
-  // .shop-car-goods_name {
-  //   @apply flex-1;
-  //   overflow: hidden;
-  //   text-overflow: ellipsis;
-  //   white-space: nowrap;
-  //   margin-left: 10px;
-  // }
+  .shop-car-goods_name {
+    @apply flex-1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-left: 5px;
+  }
 }
 
 
@@ -173,7 +228,7 @@ const clientLogOut = () => {
     border-right: 1px solid #f26700;
   }
 
-  >div {
+  >.query-btn {
     font-size: 14px;
     border-left: 0;
     padding: 5px;

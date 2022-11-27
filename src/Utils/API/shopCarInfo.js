@@ -10,6 +10,13 @@ const shopCarInfo = {
         return axiosInstance.patch(`/shopCarInfo/addToShopCar`, {
             goods_id,custom_id
         })
+    },
+    /**
+     * 获取登录后的购物车列表
+     * @returns {Promise<Object>}
+     */
+    getMyShopCarList(){
+        return axiosInstance.get(`/shopCarInfo/getMyShopCarList`);
     }
 }
 
