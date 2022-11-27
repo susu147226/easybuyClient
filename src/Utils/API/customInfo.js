@@ -40,15 +40,6 @@ const adminInfo = {
     validateCustomEmailExists(custom_email) {
         return axiosInstance.get(`/customInfo/validateCustomEmailExists/${custom_email}`);
     },
-
-    /**
-     * 修改我的密码
-     * @param {Object} param0 
-     * @returns {Promise<Object>}
-     */
-    uploadMyPassword({ oldPassword, newPassword }) {
-        return axiosInstance.post(`/customInfo/uploadMyPassword`, { oldPassword, newPassword });
-    },
     /**
      * 修改用户的密码
      * @param {{oldPassword, newPassword}} param0 
