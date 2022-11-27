@@ -1,7 +1,7 @@
 <template>
     <div class="custom-menu">
         <div class="item-menu flex flex-col">
-            <div class="title"><span class="backHome">首页</span>/个人中心</div>
+            <div class="title"><span class="backHome" @click="$router.replace({name:'HomePage'})">首页</span>/个人中心</div>
             <div class="flex flex-row">
                 <div class="flex flex-col min-h-[500px]">
                     <ul class="left-menu">

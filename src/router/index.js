@@ -25,9 +25,14 @@ const router = createRouter({
             component: () => import("../views/Register.vue"),
         },
         {
-            path: "/ShopCarInfoList",
-            name: "ShopCarInfoList",
-            component: () => import("../views/shopCarInfo/ShopCarInfoList.vue"),
+            path:"/AddToShopResult/:id",
+            name:"AddToShopResult",
+            component:()=>import("../views/shopCarInfo/AddToShopResult.vue")
+        },
+        {
+            path:"/MyShopCarList",
+            name:"MyShopCarList",
+            component:()=>import("../views/shopCarInfo/MyShopCarList.vue")
         },
         {
             path: "/SearchMoreInfo",
