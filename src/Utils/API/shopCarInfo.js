@@ -39,18 +39,6 @@ const shopCarInfo = {
         })
     },
 
-    /**
-     * 增加商品数量
-     * @param {Object} param0 
-     * @returns {Promise<AxiosResponse<any>>}
-     */
-    addToShopCar({ goods_id, custom_id }) {
-        return axiosInstance.patch(`/shopCarInfo/addToShopCar`, {
-            goods_id, custom_id
-        })
-    },
-
-    
 }
 
 
