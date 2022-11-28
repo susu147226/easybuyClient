@@ -35,7 +35,7 @@
                             </el-form-item>
                             <el-form-item label="生日" prop="custom_birthday">
                                 <el-date-picker v-model="customInfoData.custom_birthday" type="date"
-                                    placeholder="生日当天会有意外小惊喜哦~" value-format="YYYY/MM/DD" />
+                                    placeholder="生日当天会有意外小惊喜哦~" value-format="YYYY-MM-DD" />
                             </el-form-item>
                             <el-form-item label="用户地址" prop="custom_addr">
                                 <el-cascader :props="areaInfoProps" style="width: 100%" separator=" "
@@ -44,7 +44,7 @@
                             </el-form-item>
                             <el-form-item label="用户头像" prop="custom_photo">
                                 <el-upload v-loading="isUploadingImg" element-loading-text="正在上传图片" name="custom_photo"
-                                    :headers="{ easybuy_clietn_token: store.token }"
+                                    :headers="{ easybuy_client_token: store.token }"
                                     class="w-full h-[100px] border border-dashed border-gray-200 flex flex-row justify-center items-center"
                                     :before-upload="beforeUpload" :show-file-list="false" :on-success="uploadSuccess">
                                     <img v-if="customInfoData.custom_photo" :src="baseURL + customInfoData.custom_photo"
@@ -94,7 +94,7 @@ const customInfoData = reactive({
     custom_realName: "",
     custom_pwd: "",
     custom_tel: "",
-    confirm_pwd: "",
+    // confirm_pwd: "",
     custom_email: "",
     custom_sex: "",
     custom_birthday: "",
