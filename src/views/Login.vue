@@ -14,7 +14,8 @@
                                 <el-input v-model="customInfo.zh" size="large" placeholder="邮箱/手机号"></el-input>
                             </el-form-item>
                             <el-form-item prop="custom_pwd">
-                                <el-input v-model="customInfo.custom_pwd" size="large" placeholder="密码"></el-input>
+                                <el-input type="password" v-model="customInfo.custom_pwd" size="large" placeholder="密码">
+                                </el-input>
                             </el-form-item>
                             <el-form-item>
                                 <el-checkbox v-model="isagree" label="已同意并阅读小米账号 用户协议 和 隐私政策" name="type" />
@@ -56,6 +57,7 @@ const customInfo = reactive({
     custom_pwd: "123456",
 });
 
+//验证规则
 const customInfoRules = {
     zh: [
         { required: true, message: "请输入账号", trigger: "blur" }
@@ -67,6 +69,7 @@ const customInfoRules = {
 
 const loginFormEl = ref(null);
 
+//提交表单
 const submitLoginForm = () => {
     loginFormEl.value.validate(valid => {
         if (valid) {
@@ -78,6 +81,7 @@ const submitLoginForm = () => {
     });
 };
 
+//登录
 const checkLogin = () => {
     isLoading.value = true;
     API.customInfo.checkLogin(customInfo).then(res => {

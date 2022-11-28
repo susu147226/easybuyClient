@@ -102,6 +102,7 @@ const customInfoData = reactive({
     custom_photo: "",
 });
 
+//验证规则
 const customInfoDataRules = {
     custom_realName: [{
         required: true,
