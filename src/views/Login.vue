@@ -56,6 +56,7 @@ const customInfo = reactive({
     custom_pwd: "123456",
 });
 
+//验证规则
 const customInfoRules = {
     zh: [
         { required: true, message: "请输入账号", trigger: "blur" }
@@ -67,6 +68,7 @@ const customInfoRules = {
 
 const loginFormEl = ref(null);
 
+//提交表单
 const submitLoginForm = () => {
     loginFormEl.value.validate(valid => {
         if (valid) {
@@ -78,6 +80,7 @@ const submitLoginForm = () => {
     });
 };
 
+//登录
 const checkLogin = () => {
     isLoading.value = true;
     API.customInfo.checkLogin(customInfo).then(res => {
