@@ -70,9 +70,14 @@ const router = createRouter({
             }
         },
         {
-            path:"/CheckoutOrder/:Ids",
-            name:"CheckoutOrder",
-            component:()=>import("../views/customInfo/CheckoutOrder.vue")
+            path: "/CheckoutOrder/:Ids",
+            name: "CheckoutOrder",
+            component: () => import("../views/customInfo/CheckoutOrder.vue")
+        },
+        {
+            path: "/ConfirmOrder/:id",
+            name: "ConfirmOrder",
+            component: () => import("../views/shopCarInfo/ConfirmOrder.vue")
         },
         {
             path: "/CustomCenter",

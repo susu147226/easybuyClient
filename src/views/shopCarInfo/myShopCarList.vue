@@ -52,7 +52,7 @@
                         合计：<span class="text-[32px]">{{ totalMoney }}</span> 元
                     </div>
                     <div class="w-[200px] h-full">
-                        <el-button type="button" :disabled="selectedRows.length <= 0" @click="toCheckoutOrder">去结算
+                        <el-button type="danger" :disabled="selectedRows.length <= 0" @click="toCheckoutOrder">去结算
                         </el-button>
                     </div>
                 </div>
@@ -177,5 +177,7 @@ const toCheckoutOrder = () => {
 
 
 <style scoped lang="scss">
-
+:deep(.el-button) {
+    @apply w-full h-full
+}
 </style>

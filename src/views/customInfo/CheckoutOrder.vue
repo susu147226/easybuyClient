@@ -100,9 +100,8 @@
                     <button type="button" class="w-[180px] h-[40px] border border-solid border-gray-400 text-gray-400"
                         @click="$router.back()">返回购物车
                     </button>
-                    <button type="button" class="w-[160px] h-[40px] bg-primary text-white ml-10"
-                        @click="confirmSubmitOrder">去结算
-                    </button>
+                    <el-button type="danger" @click="confirmSubmitOrder">去结算
+                    </el-button>
                 </div>
             </el-skeleton>
         </div>
@@ -271,7 +270,7 @@ const confirmSubmitOrder = () => {
     }
     API.orderInfo.submitOrder(orderInfo)
         .then(result => {
-            router.replace({ name: 'Login', params: { id: result } });
+            router.replace({ name: 'ConfirmOrder', params: { id: result } });
         })
         .catch(() => {
             ElMessageBox.alert("提交订单失败", "提示", {
@@ -313,7 +312,6 @@ const clientLogOut = () => {
         @apply relative h-[200px] border border-solid border-gray-400 p-6 box-border leading-7 cursor-pointer;
 
         &.selected {
-            border-color: $primaryColor;
             border-width: 2px;
         }
     }
@@ -342,5 +340,10 @@ const clientLogOut = () => {
             @apply min-w-[120px] text-right;
         }
     }
+}
+
+
+:deep(.el-button) {
+    @apply w-[160px] h-[40px] text-white ml-10
 }
 </style>
