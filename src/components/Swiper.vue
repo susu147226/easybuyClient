@@ -54,7 +54,7 @@ getTopProductsInfoListAndGoods();
 let currentIndex = ref(-1)
 
 const toGoodsDetail = item => {
-    window.open(router.resolve({ name: "goodsDetail", params: { id: item.id } }).href);
+    window.open(router.resolve({ name: "GoodsDetail", params: { id: item.id } }).href);
 }
 
 // 跳转更多商品页

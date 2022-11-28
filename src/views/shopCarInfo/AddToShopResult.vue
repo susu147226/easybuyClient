@@ -1,10 +1,33 @@
 <template>
-    <page-view>
-        <main-container>
-            <div v-loading="isLoading" element-loading-text="数据正在加载..." class="bg-gray-100 py-10 box-border">
-                <div class="base-width m-auto w-[1226px] ">
-                    <div class="goods-grid-box my-5">
-                        <div class="goods-grid-item" @click="toGoodsDetail(item)" v-for="(item, index) in queryResultData.dataList" :key="item.id">
+    <main-container>
+        <div class="bg-gray-100">
+            <div class="w-[1226px] m-auto">
+                <div
+                    class="flex flex-row justify-between items-center border-0 border-b border-gray-200 box-border py-[30px]">
+                    <div class="flex flex-row ">
+                        <el-icon color="#16a34a" size="56" class="text-white">
+                            <SuccessFilled />
+                        </el-icon>
+                        <div class="flex flex-col ml-10 justify-center">
+                            <span class="text-[18px]">添加成功</span>
+                            <div class="text-[14px] text-gray-500">
+                                您的商品<span class="px-4 text-primaryColor font-bold">{{ queryResultData.goods_name
+                                }}</span>已成功添加到购物车</div>
+                        </div>
+                    </div>
+                    <div>
+                        <el-button type="primary" @click="$router.replace({ name: 'HomePage' })">继续购物
+                        </el-button>
+                        <el-button color="#ff6700" size="large" style="color: white;"
+                        @click="$router.replace({ name: 'MyShopCarList' })">去购物车结算</el-button>
+                    </div>
+                </div>
+                <div v-loading="isLoading" element-loading-text="数据正在加载...">
+                    <div class="flex text-gray-500 justify-center items-center text-[22px] mt-[40px]">其他人还添加了这些到购物车
+                    </div>
+                    <div class="goods-grid-box py-[20px]">
+                        <div class="goods-grid-item" @click="toGoodsDetail(item)"
+                            v-for="(item, index) in queryResultData.dataList" :key="item.id">
                             <div v-if="item.goods_status === 2 || item.goods_status === 4" class="goods_status"
                                 :class="'goods_status-' + item.goods_status">
                                 {{ ["", "上架", "预售", "正常", "促销"][item.goods_status] }}
@@ -19,82 +42,72 @@
                                         {{ item.goods_name }}
                                     </h3>
                                     <p class="desc">{{ item.goods_brief_o }}</p>
-                                    <p class="price"><span class="num">{{ item.goods_sale_price }}</span>元<span>起</span>
+                                    <p class="price"><span class="num">{{ item.goods_sale_price
+                                    }}</span>元<span>起</span>
                                         <del><span class="num">{{ item.goods_price }}</span>元</del>
                                     </p>
                                 </div>
                             </a>
                         </div>
                     </div>
-                    <div class="my-[20px] flex flex-row justify-between items-center" v-if="queryResultData.dataList.length > 0">
-                        <p class="text-gray-500 text-[14px]">当前共第{{ queryItemData.pageIndex }}页，共{{
-                                queryResultData.pageCount
-                        }}页，共{{ queryResultData.totalCount }}条</p>
-                        <el-pagination background layout="prev, pager, next" :current-page="queryItemData.pageIndex"
-                            @current-change="pageChange" :total="queryResultData.totalCount"></el-pagination>
-                    </div>
                 </div>
             </div>
-        </main-container>
-    </page-view>
+        </div>
+    </main-container>
 </template>
 
 <script setup>
-import { ref, reactive, inject } from "vue"
+import { SuccessFilled } from "@element-plus/icons-vue"
+import { ref, reactive, inject, onMounted } from "vue"
 import API from "../../Utils/API";
-import { useRoute, useRouter } from "vue-router"
+import { ElNotification } from 'element-plus'
+import { useRouter, useRoute } from "vue-router"
 
 
-const router = useRouter();
 const route = useRoute();
+const router = useRouter();
 
 const baseURL = inject("baseURL");
-const queryItemData = reactive({
-    pageIndex: 1,
-    goods_name: "",
-    products_id: "",
-})
-
 const queryResultData = reactive({
     dataList: [],
-    pageCount: 0,
-    pageEnd: 1,
-    pageStart: 1,
-    totalCount: 0
+    goods_name: ""
 })
+
+const findById = (id) => {
+    API.goodsInfo.findById(id)
+        .then((result) => {
+            // console.log(result);
+            queryResultData.goods_name = result.goods_name;
+        })
+}
+
+// 页面跳转到细节页面立即获取id请求数据
+(() => {
+    let id = route.params.id;
+    if (id) {
+        findById(id);
+    }
+})()
 
 const isLoading = ref(false)
 const queryData = () => {
     isLoading.value = true;
-    API.goodsInfo.getListByPage(queryItemData)
+    API.goodsInfo.getRecommendGoodsList()
         .then(result => {
             // console.log(result);
             result.listData.forEach(item => {
                 item.goods_photo = JSON.parse(item.goods_photo);
             })
             queryResultData.dataList = result.listData;
-            queryResultData.pageCount = result.pageCount;
-            queryResultData.pageStart = result.pageStart;
-            queryResultData.pageEnd = result.pageEnd;
-            queryResultData.totalCount = result.totalCount;
         }).catch(error => {
             console.log(error);
+            ElNotification.error({
+                title: '提示',
+                message: '添加购物车未成功，请重试',
+            })
         }).finally(() => {
             isLoading.value = false;
         })
-}
-
-(() => {
-    queryItemData.goods_name = route.query.keyword;
-    queryItemData.products_id = route.query.products_id;
-    queryData();
-})();
-
-// 当页码改变的时候 重新渲染数据
-const pageChange = (page) => {
-    queryItemData.pageIndex = page;
-    // console.log(page);
-    queryData();
 }
 
 
@@ -102,10 +115,14 @@ const pageChange = (page) => {
 const toGoodsDetail = (item) => {
     window.open(router.resolve({ name: "GoodsDetail", params: { id: item.id } }).href);
 }
+
+onMounted(() => {
+    queryData();
+})
+
 </script>
 
-
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .goods-grid-box {
     display: grid;
     grid-template-columns: repeat(5, 1fr);

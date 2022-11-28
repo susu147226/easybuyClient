@@ -1,5 +1,8 @@
 import axios from "axios";
 
+import {mainStore} from "../store"
+
+
 
 const axiosInstance = axios.create({
     baseURL: baseURL,
@@ -8,6 +11,13 @@ const axiosInstance = axios.create({
 
 
 // 设置请求拦截
+axiosInstance.interceptors.request.use(config => {
+    const store = mainStore();
+    // console.log(store);
+    config.headers["easybuy_client_token"] = store.token;
+
+    return config;
+})
 
 
 
@@ -26,7 +36,7 @@ axiosInstance.interceptors.response.use(resp => {
     if (error.response.status === 403) {
         //说明没有权限了，用户要重新登录
         router.replace({
-            name: "Login"
+            name:"Login"
         })
     }
     return Promise.reject(error);

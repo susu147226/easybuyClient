@@ -1,26 +1,25 @@
 <template>
-    <page-view>
-        <title-bar></title-bar>
-        <div class="custom-menu">
-            <div class="item-menu flex flex-row">
+    <div class="custom-menu">
+        <div class="item-menu flex flex-col">
+            <div class="title"><span class="backHome" @click="$router.replace({ name: 'HomePage' })">首页</span>/个人中心
+            </div>
+            <div class="flex flex-row">
                 <div class="flex flex-col">
-                    <span class="title">首页/个人中心</span>
-                    <ul class="left-menu">
-                        <li>个人中心</li>
-                        <li>收货地址</li>
-                        <li>订单列表</li>
-                        <li>修改密码</li>
-                        <li>我的购物车</li>
+                    <ul class="left-menu text-[14px]">
+                        <li @click="$router.push({ name: 'CustomInfo' })">个人中心</li>
+                        <li @click="$router.push({ name: 'AddressInfoList' })">收货地址</li>
+                        <li @click="$router.push({ name: 'OrderInfoList' })">订单列表</li>
+                        <li @click="$router.push({ name: 'ChangePwd' })">修改密码</li>
+                        <li @click="$router.push({ name: 'MyShopCarList' })">我的购物车</li>
                     </ul>
                 </div>
-
-                <div>
+                <div class="flex-1 overflow-auto bg-white ml-20">
                     <slot></slot>
+
                 </div>
             </div>
         </div>
-        <foot-bar></foot-bar>
-    </page-view>
+    </div>
 </template>
 <script setup>
 
@@ -28,6 +27,7 @@
 <style scoped lang="scss">
 .custom-menu {
     background-color: #f3f4f6;
+    border: none;
 
     .item-menu {
         width: 1226px;
@@ -35,21 +35,26 @@
     }
 
     .title {
-        @apply mt-10 mb-10;
+        @apply my-10;
         font-size: 14px;
         color: #6b86b2;
+
+        .backHome:hover {
+            cursor: pointer;
+            color: #ff6700;
+        }
     }
 
     .left-menu {
         @apply w-[200px] h-full bg-white p-20;
-        border: 1px solid #f3f4f6;
+        // border: 1px solid #f3f4f6;
 
         li {
             @apply mt-10
         }
 
         li:hover {
-            color: #ffb452;
+            color: #ff6700;
             cursor: pointer;
         }
     }

@@ -1,5 +1,5 @@
 <template>
-    <main-container v-loading="isLoading" element-loading-text="数据正在加载...">
+    <main-container v-loading="isLoading" :element-loading-text="loadingText">
         <div class="nav-bar w-full m-auto">
             <div class=" w-[1226px] m-auto flex flex-row items-center h-full justify-between">
                 <div class="left flex flex-row items-center">
@@ -20,7 +20,7 @@
         </div>
         <!-- 商品展示-->
         <div class=" m-auto flex flex-row mt-20 w-[1226px]">
-            <div class="left-swiper-box w-[560px] h-[560px]">
+            <div class="left-swiper-box w-[560px] h-[560px] mr-[40px]">
                 <goods-detail-swiper :goods_photo="goodsDetailData.goods_photo"></goods-detail-swiper>
             </div>
             <div class="right-goods-info-box flex-1  box-border p-2">
@@ -73,15 +73,15 @@
                     </div>
                 </div>
                 <!--按钮-->
-                <div class="flex flex-row mt-15">
-                    <button type="button"
+                <div class="flex flex-row my-15">
+                    <button type="button" @click="submitAddShopCar"
                         class="border-none outline-none bg-primaryColor text-white flex flex-row justify-center items-center w-[260px] h-[50px]">
                         <el-icon class="mr-4" size="20">
                             <ShoppingCartFull />
                         </el-icon>
                         加入购物车
                     </button>
-                    <button type="button" @click="isLove = true" :class="{ 'active': isLove === true }"
+                    <button type="button"
                         class="border-none outline-none flex flex-row h-[50px] w-[120px] bg-gray-300 text-white justify-center items-center ml-10">
                         <el-icon size="20" class="mr-2">
                             <Sunny />
@@ -120,7 +120,7 @@
 import goodsDetailSwiper from "./goodsDetailSwiper.vue";
 import { useRoute, useRouter } from "vue-router";
 import { computed, ref } from "vue";
-import { ElMessageBox } from "element-plus";
+import { ElMessageBox, ElMessage } from "element-plus";
 import { Location, ShoppingCartFull, Pouring, Sunny } from "@element-plus/icons-vue";
 import API from "../../Utils/API";
 import { mainStore } from "../../store/index";
@@ -130,16 +130,18 @@ const route = useRoute();
 const router = useRouter();
 
 
-const isLove = ref(false);
-
+// 请求商品的细节数据
 const goodsDetailData = ref({});
+// 用于选择商品的属性
 const selectedTypeMap = ref(new Map());
+// 加载提示
+const loadingText = ref("数据正在加载中...");
 const isLoading = ref(false);
 const findById = (id) => {
     isLoading.value = true;
     API.goodsInfo.findById(id)
         .then(result => {
-            console.log(result);
+            // console.log(result);
             result.goods_desc = JSON.parse(result.goods_desc);
             result.goods_photo = JSON.parse(result.goods_photo);
             goodsDetailData.value = result;
@@ -152,6 +154,7 @@ const findById = (id) => {
         })
 }
 
+// 页面跳转到细节页面立即获取id请求数据
 (() => {
     let id = route.params.id;
     if (id) {
@@ -174,6 +177,44 @@ const selected_goods_desc = computed(() => {
     }
     return "";
 });
+
+// 提交到购物车
+const submitAddShopCar = () => {
+    if (loginClientInfo.value) {
+        // 此时说明用户已经登录
+        isLoading.value = true;
+        loadingText.value = "正在加入购物车..."
+        API.shopCarInfo.addToShopCar({ goods_id: goodsDetailData.value.id, custom_id: goodsDetailData.value.products_id })
+            .then(result => {
+                // console.log(result);
+                router.replace({ name: "AddToShopResult", params: { id: goodsDetailData.value.id } })
+            }).finally(() => {
+                isLoading.value = false;
+            })
+    }
+    else {
+        ElMessageBox.alert("您还没有登录，请先去登录", "提示", {
+            type: "info",
+            confirmButtonText: "现在去登录",
+            cancelButtonText: "算了等一会",
+            showCancelButton: true,
+        }).then(result => {
+            ElMessage({
+                type: "success",
+                message: "操作成功"
+            })
+            router.push({
+                name: 'Login',
+                query: {
+                    redirectPath: route.fullPath
+                }
+            })
+        }).catch(() => {
+
+        });
+    }
+}
+
 </script>
 
 

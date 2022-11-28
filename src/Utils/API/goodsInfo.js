@@ -35,6 +35,13 @@ const goodsInfo = {
      */
     findById(id){
         return axiosInstance.get(`/goodsInfo/findById/${id}`);
+    },
+    /**
+     * 获取推荐商品列表
+     * @returns {Promise<Object>}
+     */
+    getRecommendGoodsList(){
+        return axiosInstance.get("/goodsInfo/getRecommendGoodsList");
     }
 }
 

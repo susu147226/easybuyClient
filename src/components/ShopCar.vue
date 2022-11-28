@@ -1,7 +1,7 @@
 <template>
     <page-view>
-        <div class="py-20 border-b-2 border-solid my-shop-car-header">
-            <div class="w-[1226px] m-auto flex flex-row items-center justify-between">
+        <div class="py-6 border-b-2 border-solid my-shop-car-header w-[1226px] m-auto">
+            <div class="base-width m-auto flex flex-row items-end">
                 <img src="../assets/img/Logo.png" class="w-[56px] h-[56px] cursor-pointer"
                     @click="$router.replace({ name: 'HomePage' })" alt="">
                 <div class="flex-1 ml-10 flex flex-row items-baseline">
