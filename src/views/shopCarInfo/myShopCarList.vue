@@ -64,7 +64,7 @@
 <script setup>
 import { Close } from "@element-plus/icons-vue";
 import { reactive, ref, inject, computed } from "vue";
-
+import { useRouter } from "vue-router"
 import API from "../../Utils/API";
 
 import { mainStore } from "../../store/index";
@@ -139,32 +139,6 @@ const carGoodsNumChange = (currentValue, oldValue, row) => {
     }
 }
 
-/**
- * 右上角的下拉菜单点击以后的事件
- */
-const dropdownCommand = (command) => {
-    if (command === "customCenter") {
-        router.push({ name: "CustomInfo" })
-    } else if (command === "clientLogOut") {
-        clientLogOut();
-    }
-
-}
-/**
- * 退出登录
- */
-const clientLogOut = () => {
-    ElMessageBox.confirm("确定要退出登录吗？", "询问", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-    })
-        .then(() => {
-            store.dispatch("clientLogOut");
-        })
-        .catch(() => {
-            console.log("取消退出登录");
-        })
-}
 
 /**
  * 去结算

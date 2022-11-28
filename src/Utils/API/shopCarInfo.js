@@ -30,8 +30,8 @@ const shopCarInfo = {
      * @param {Number} id 
      * @returns {Promise<Object>}
      */
-    deleteById(id) {
-        return axiosInstance.delete(`/shopCarInfo/deleteById${id}`)
+     deleteById(id) {
+        return axiosInstance.delete(`/shopCarInfo/deleteById/${id}`);
     },
 
     /**
