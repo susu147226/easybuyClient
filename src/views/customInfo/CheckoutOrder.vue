@@ -1,11 +1,11 @@
 <template>
     <div class="py-6 border-b-2 border-solid my-shop-car-header" v-loading="isSubmitOrderLoading"
         element-loading-text="正在提交订单">
-        <div class="base-width m-auto flex flex-row items-center">
+        <div class="w-[1226px] m-auto flex flex-row items-center py-20">
             <img src="../../assets/img/Logo.png" class="w-[56px] h-[56px] cursor-pointer" alt=""
                 @click="$router.replace({ name: 'HomePage' })">
             <div class="text-[22px] ml-10 flex-1">确认订单</div>
-            <div class="self-end">
+            <div class="self-end flex flex-row items-center">
                 <el-dropdown @command="dropdownCommand">
                     <span class="el-dropdown-link text-gray-500 font-bold">
                         {{ loginClientInfo.custom_realName }}
@@ -16,17 +16,20 @@
                     <template #dropdown>
                         <el-dropdown-menu>
                             <el-dropdown-item command="CustomCenter">人个中心</el-dropdown-item>
-                            <el-dropdown-item divided command="clientLogOut">退出登录</el-dropdown-item>
+                            <el-dropdown-item divided command="logOut">退出登录</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
-                    <span class="mx-2 text-gray-400">|</span>
-                    <span>我的订单</span>
                 </el-dropdown>
+                <div class="ml-4">
+                    <span class="mx-4 text-gray-400">|</span>
+                    <span @click="$router.replace({ name: 'OrderInfoList' })"
+                        class="text-[14px] text-gray-600 hover:text-primaryColor cursor-pointer">我的订单</span>
+                </div>
             </div>
         </div>
     </div>
     <div class="bg-gray-100 overflow-auto">
-        <div class="base-width m-auto mt-[40px] p-[20px] bg-white">
+        <div class="w-[1226px] m-auto mt-[40px] p-[20px] bg-white">
             <h2 class="text-gray-700 text-[18px] my-[10px]">收货地址</h2>
             <el-skeleton animated :loading="isAddressInfoLoading">
                 <div class="address-list">
@@ -39,11 +42,11 @@
                         <p class="address-all">{{ item.province }} {{ item.city }} {{ item.area }} {{
                                 item.address_detail
                         }}</p>
-                        <el-button type="text" class="absolute right-6 bottom-2">修改</el-button>
+                        <el-tag type="primary" class="absolute right-6 bottom-2">修改</el-tag>
                     </div>
                     <div
                         class="h-[200px] flex flex-row justify-center items-center border border-solid border-gray-400 p-6 box-border leading-7">
-                        <el-button :icon="CirclePlus" type="text" @click="isShowAddAddressDialog = true">
+                        <el-button :icon="CirclePlus" type="primary" plain @click="isShowAddAddressDialog = true">
                             新增地址
                         </el-button>
                     </div>
@@ -284,6 +287,18 @@ const confirmSubmitOrder = () => {
 
 
 /**
+ * 右上角的下拉菜单点击以后的事件
+ */
+const dropdownCommand = (command) => {
+    if (command === "CustomCenter") {
+        router.push({ name: "CustomInfo" })
+    } else if (command === "logOut") {
+        clientLogOut();
+    }
+
+}
+
+/**
  * 退出登录
  */
 const clientLogOut = () => {
@@ -292,13 +307,15 @@ const clientLogOut = () => {
         cancelButtonText: "取消",
     })
         .then(() => {
-            store.dispatch("clientLogOut");
+            store.logOut();
+            router.replace({
+                name: "HomePage"
+            })
         })
         .catch(() => {
             console.log("取消退出登录");
         })
 }
-
 </script>
   
   
@@ -313,6 +330,7 @@ const clientLogOut = () => {
 
         &.selected {
             border-width: 2px;
+            border-color: #ff6700;
         }
     }
 }

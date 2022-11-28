@@ -1,10 +1,10 @@
 <template>
     <div v-loading="isLoading" element-loading-text="正在加载数据">
-        <div class="py-6 border-b-2 border-solid my-shop-car-header">
+        <div class="py-20 border-b-2 border-solid my-shop-car-header">
             <div class="w-[1226px] m-auto flex flex-row items-center">
                 <img src="../../assets/img/Logo.png" class="w-[56px] h-[56px]" alt="">
                 <div class="text-[22px] ml-10 flex-1">支付订单</div>
-                <div class="self-end">
+                <div class="self-end flex flex-row items-center">
                     <el-dropdown @command="dropdownCommand">
                         <span class="el-dropdown-link text-gray-500 font-bold">
                             {{ loginClientInfo.custom_realName }}
@@ -14,19 +14,23 @@
                         </span>
                         <template #dropdown>
                             <el-dropdown-menu>
-                                <el-dropdown-item command="customCenter">人个中心</el-dropdown-item>
-                                <el-dropdown-item divided command="clientLogOut">退出登录</el-dropdown-item>
+                                <el-dropdown-item command="CustomCenter">人个中心</el-dropdown-item>
+                                <el-dropdown-item divided command="logOut">退出登录</el-dropdown-item>
                             </el-dropdown-menu>
                         </template>
                         <span class="mx-2 text-gray-400">|</span>
-                        <span @click="$router.replace({ name: 'orderInfoList' })">我的订单</span>
                     </el-dropdown>
+                    <div class="ml-4">
+                        <span class="mx-4 text-gray-400" >|</span>
+                        <span @click="$router.replace({ name: 'OrderInfoList' })"
+                            class="text-[14px] text-gray-600 hover:text-primaryColor cursor-pointer">我的订单</span>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="bg-gray-100 overflow-auto">
             <div class="w-[1226px] bg-white m-auto mt-[20px] flex flex-row items-center p-[20px]">
-                <span class="iconfont icon-chenggong1 text-green-600" style="font-size: 72px"></span>
+                <span class="iconfont icon-chenggong text-green-600" style="font-size: 72px"></span>
                 <div class="flex-1 text-[14px] text-gray-600 ml-[20px] leading-8">
                     <p class="text-[22px] text-gray-800">订单提交成功！去支付喽~</p>
                     <p>请在 <span class="text-primary">2小时0分内完成支付，超时后将取消订单</span></p>
@@ -127,11 +131,12 @@ const toAliPay = () => {
  * 右上角的下拉菜单点击以后的事件
  */
 const dropdownCommand = (command) => {
-    if (command === "customCenter") {
+    if (command === "CustomCenter") {
         router.push({ name: "CustomInfo" })
-    } else if (command === "clientLogOut") {
+    } else if (command === "logOut") {
         clientLogOut();
     }
+
 }
 /**
  * 退出登录
@@ -142,7 +147,10 @@ const clientLogOut = () => {
         cancelButtonText: "取消",
     })
         .then(() => {
-            store.dispatch("clientLogOut");
+            store.logOut();
+            router.replace({
+                name: "HomePage"
+            })
         })
         .catch(() => {
             console.log("取消退出登录");

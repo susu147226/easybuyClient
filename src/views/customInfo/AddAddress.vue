@@ -19,7 +19,7 @@
         </el-form-item>
         <el-form-item>
             <el-button class="btn-save" @click="submitForm" :loading="isSubmitLoading">保存</el-button>
-            <el-button @click="closeDialog">关闭</el-button>
+            <el-button type="info" @click="closeDialog">关闭</el-button>
         </el-form-item>
     </el-form>
 </template>

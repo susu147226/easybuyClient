@@ -5,13 +5,13 @@
                 <el-input readonly placeholder="用户" v-model="loginClientInfo.custom_realName"></el-input>
             </el-form-item>
             <el-form-item label="原密码" prop="oldPassword">
-                <el-input v-model="changePwdFormData.oldPassword" placeholder="原密码"></el-input>
+                <el-input type="password" v-model="changePwdFormData.oldPassword" placeholder="原密码"></el-input>
             </el-form-item>
             <el-form-item label="新密码" prop="newPassword">
-                <el-input v-model="changePwdFormData.newPassword" placeholder="新密码"></el-input>
+                <el-input type="password" v-model="changePwdFormData.newPassword" placeholder="新密码"></el-input>
             </el-form-item>
             <el-form-item label="确认密码" prop="confirmPassword">
-                <el-input v-model="changePwdFormData.confirmPassword" placeholder="确认密码"></el-input>
+                <el-input type="password" v-model="changePwdFormData.confirmPassword" placeholder="确认密码"></el-input>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" :loading="isLoading" @click="submitChangePwdFormEl">提交</el-button>

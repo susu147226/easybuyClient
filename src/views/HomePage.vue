@@ -292,7 +292,7 @@
 
 <script setup>
 import { ArrowRight } from "@element-plus/icons-vue"
-import { ref, reactive, onMounted, inject } from "vue"
+import { ref, inject } from "vue"
 import { useRouter } from "vue-router"
 import API from "../Utils/API";
 const baseURL = inject("baseURL");
