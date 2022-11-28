@@ -54,6 +54,24 @@ const router = createRouter({
             }
         },
         {
+            path: "/CheckoutOrder/:Ids",
+            name: "CheckoutOrder",
+            component: () => import("../views/customInfo/CheckoutOrder.vue"),
+            meta: {
+                title: '确认订单',
+                requireAuth: true
+            }
+        },
+        {
+            path: "/ConfirmOrder/:id",
+            name: "ConfirmOrder",
+            component: () => import("../views/shopCarInfo/ConfirmOrder.vue"),
+            meta: {
+                title: '确定支付',
+                requireAuth: true
+            }
+        },
+        {
             path: "/SearchMoreInfo",
             name: "SearchMoreInfo",
             component: () => import("../views/searchMoreInfoList/SearchMoreInfo.vue"),
@@ -68,16 +86,6 @@ const router = createRouter({
             meta: {
                 title: '商品详情'
             }
-        },
-        {
-            path: "/CheckoutOrder/:Ids",
-            name: "CheckoutOrder",
-            component: () => import("../views/customInfo/CheckoutOrder.vue")
-        },
-        {
-            path: "/ConfirmOrder/:id",
-            name: "ConfirmOrder",
-            component: () => import("../views/shopCarInfo/ConfirmOrder.vue")
         },
         {
             path: "/CustomCenter",
