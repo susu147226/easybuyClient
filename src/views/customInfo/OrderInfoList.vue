@@ -139,7 +139,7 @@ const queryData = () => {
             myOrderInfoList.pageEnd = result.pageEnd;
             myOrderInfoList.totalCount = result.totalCount;
             myOrderInfoList.pageCount = result.pageCount;
-            console.log(result);
+            // console.log(result);
 
         })
         .finally(() => {

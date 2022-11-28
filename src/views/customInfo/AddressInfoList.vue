@@ -5,7 +5,8 @@
                 <template #header>
                     <div class="card-header flex flex-row justify-between">
                         <span>我的收货地址</span>
-                        <el-button class="button" text><span style="color: #ff6700;">新增地址</span></el-button>
+                        <el-button @click="isShowAddAddressDialog = true" class="button" text><span
+                                style="color: #ff6700;">新增地址</span></el-button>
                     </div>
                 </template>
                 <!-- <div v-for="o in 3" :key="o" class="text item">{{ 'List item ' + o }}</div> -->
@@ -63,6 +64,10 @@
                         <el-pagination background layout="prev, pager, next" :total="resultData.totalCount"
                             @current-change="currentChange" />
                     </div>
+                    <el-dialog :destroy-on-close="true" :close-on-click-modal="false" :close-on-press-escape="false"
+                        v-model="isShowAddAddressDialog">
+                        <AddAddress @closeDialog="isShowAddAddressDialog = false" />
+                    </el-dialog>
                 </template>
             </el-card>
         </div>
@@ -70,13 +75,11 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
-import { mainStore } from "../../store/index";
 import { InfoFilled } from "@element-plus/icons-vue";
 import API from "../../Utils/API";
-import { onMounted, inject } from "vue";
+import { ref, onMounted, inject, reactive, watch } from "vue";
 import { ElMessage } from 'element-plus'
-
+import AddAddress from "../customInfo/AddAddress.vue"
 
 // const baseURL = inject("baseURL");
 
@@ -117,7 +120,7 @@ const currentChange = (index) => {
 
 
 const deleteCurrentAddress = async (id) => {
-    console.log(id);
+    // console.log(id);
     let result = await API.addressInfo.deleteById({ id: id });
     queryData();
     ElMessage({
@@ -125,6 +128,18 @@ const deleteCurrentAddress = async (id) => {
         type: 'success',
     })
 }
+
+
+/**
+ * 是否显示新增地址的Dialog
+ */
+const isShowAddAddressDialog = ref(false);
+
+watch(isShowAddAddressDialog, (newValue, oldValue) => {
+    if (newValue === false) {
+        queryData();
+    }
+})
 
 </script>
 

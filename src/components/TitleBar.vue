@@ -72,7 +72,7 @@ import { mainStore } from "../store"
 import { storeToRefs } from "pinia"
 import { ElMessageBox, ElMessage } from "element-plus";
 import { useRouter } from "vue-router"
-import { ref, reactive, computed, onMounted, inject } from "vue"
+import { ref, reactive, computed, inject } from "vue"
 import API from "../Utils/API";
 const router = useRouter();
 const store = mainStore();
@@ -129,11 +129,11 @@ const shopCarTotalCount = computed(() => {
   return totalCount;
 })
 
-onMounted(() => {
-  if (loginClientInfo) {
-    getMyShopCarList();
-  }
-})
+
+if (loginClientInfo) {
+  getMyShopCarList();
+}
+
 
 
 
