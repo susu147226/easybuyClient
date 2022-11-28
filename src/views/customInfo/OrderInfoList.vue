@@ -4,7 +4,7 @@
             <div class="mt-20 ml-20 mr-20 w-full h-full">
                 <div class="flex flex-row items-baseline my-5 text-gray-500">
                     <span class="text-[22px]">我的订单</span>
-                    <span class="text-[12px] ml-2">请谨防钓鱼链接或诈骗电话</span>
+                    <span class="text-[12px] ml-4">请谨防钓鱼链接或诈骗电话</span>
                 </div>
                 <el-skeleton :animated="true" :loading="isLoading">
                     <ul class="order-type-list mt-20">
