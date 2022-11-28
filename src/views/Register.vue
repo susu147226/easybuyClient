@@ -35,7 +35,7 @@
                             </el-form-item>
                             <el-form-item label="生日" prop="custom_birthday">
                                 <el-date-picker v-model="customInfoData.custom_birthday" type="date"
-                                    placeholder="生日当天会有意外小惊喜哦~" value-format="YYYY/MM/DD" />
+                                    placeholder="生日当天会有意外小惊喜哦~" value-format="YYYY-MM-DD" />
                             </el-form-item>
                             <el-form-item label="用户地址" prop="custom_addr">
                                 <el-cascader :props="areaInfoProps" style="width: 100%" separator=" "
@@ -94,7 +94,7 @@ const customInfoData = reactive({
     custom_realName: "",
     custom_pwd: "",
     custom_tel: "",
-    confirm_pwd: "",
+    // confirm_pwd: "",
     custom_email: "",
     custom_sex: "",
     custom_birthday: "",

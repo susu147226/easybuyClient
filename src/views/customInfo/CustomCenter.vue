@@ -11,16 +11,6 @@
 </template>
 
 <script setup>
-import { computed, ref, inject } from "vue";
-import { mainStore } from "../../store/index";
-const baseURL = inject("baseURL");
-
-const store = mainStore();
-const loginClientInfo = store.loginClientInfo;
-
-
-console.log(loginClientInfo);
-
 
 </script>
 

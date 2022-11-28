@@ -87,6 +87,7 @@ const savePwdData = () => {
             ElMessageBox.alert("修改密码成功", "提示", {
                 type: "success"
             })
+            
         }).finally(() => {
             changePwdFormData.oldPassword = '';
             changePwdFormData.newPassword = '';
