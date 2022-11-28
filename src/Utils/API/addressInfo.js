@@ -6,7 +6,7 @@ const addressInfo = {
      * @param {*} param0 
      * @returns {Promise<Object>}
      */
-    getMyAddressInfoList({ pageIndex }) {
+    getMyAddressInfoList( pageIndex ) {
         return axiosInstance.get(`/addressInfo/getMyAddressInfoList`, {
             params: {
                 pageIndex

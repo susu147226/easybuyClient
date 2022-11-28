@@ -98,7 +98,7 @@ const resultData = reactive({
 })
 //查询操作，拉数据
 const queryData = async () => {
-    let result = await API.addressInfo.getMyAddressInfoList({ pageIndex: queryFormData.pageIndex });
+    let result = await API.addressInfo.getMyAddressInfoList( queryFormData.pageIndex);
     // console.log(result);
 
     resultData.listData = result.listData;

@@ -52,10 +52,8 @@
                         合计：<span class="text-[32px]">{{ totalMoney }}</span> 元
                     </div>
                     <div class="w-[200px] h-full">
-                        <button type="button"
-                            class="bg-primary text-white w-full h-full disabled:opacity-30 disabled:cursor-no-drop transition-all"
-                            :disabled="selectedRows.length <= 0" @click="toCheckoutOrder">去结算
-                        </button>
+                        <el-button type="button" :disabled="selectedRows.length <= 0" @click="toCheckoutOrder">去结算
+                        </el-button>
                     </div>
                 </div>
             </div>
@@ -146,7 +144,7 @@ const carGoodsNumChange = (currentValue, oldValue, row) => {
  */
 const dropdownCommand = (command) => {
     if (command === "customCenter") {
-        router.push({ name: "customInfo" })
+        router.push({ name: "CustomInfo" })
     } else if (command === "clientLogOut") {
         clientLogOut();
     }
