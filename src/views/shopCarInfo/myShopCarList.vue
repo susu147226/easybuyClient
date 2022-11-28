@@ -170,7 +170,7 @@ const clientLogOut = () => {
  * 去结算
  */
 const toCheckoutOrder = () => {
-    router.push({ name: "checkoutOrder", params: { Ids: (selectedRows.value.map(item => item.id)).join(",") } });
+    router.push({ name: "CheckoutOrder", params: { Ids: (selectedRows.value.map(item => item.id)).join(",") } });
 }
 
 </script>
