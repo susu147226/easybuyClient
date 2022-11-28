@@ -43,7 +43,8 @@
 
                             <ul class="flex flex-row justify-between">
                                 <li class="h-[120px] w-[120px]">
-                                    <img :src="baseURL + item.orderDetailInfoList[0].goodsInfo.goods_photo[0]" alt="">
+                                    <el-image loading="lazy"
+                                        :src="baseURL + item.orderDetailInfoList[0].goodsInfo.goods_photo[0]" alt="" />
                                 </li>
                                 <li class="flex flex-1 flex-col justify-center ml-20">
                                     <span>{{ item.orderDetailInfoList[0].goodsInfo.goods_name }}</span>
