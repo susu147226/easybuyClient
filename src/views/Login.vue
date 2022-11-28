@@ -14,7 +14,8 @@
                                 <el-input v-model="customInfo.zh" size="large" placeholder="邮箱/手机号"></el-input>
                             </el-form-item>
                             <el-form-item prop="custom_pwd">
-                                <el-input v-model="customInfo.custom_pwd" size="large" placeholder="密码"></el-input>
+                                <el-input type="password" v-model="customInfo.custom_pwd" size="large" placeholder="密码">
+                                </el-input>
                             </el-form-item>
                             <el-form-item>
                                 <el-checkbox v-model="isagree" label="已同意并阅读小米账号 用户协议 和 隐私政策" name="type" />
