@@ -17,7 +17,13 @@ const shopCarInfo = {
      */
     getMyShopCarList(){
         return axiosInstance.get(`/shopCarInfo/getMyShopCarList`);
-    }
+    },
+    /**
+     * @param Ids 这里的Ids是一个字符串，如果有多个，用逗号隔开
+     */
+     getMyCheckoutShopCarList(Ids) {
+        return axiosInstance.get(`/shopCarInfo/getMyCheckoutShopCarList/${Ids}`);
+    },
 }
 
 

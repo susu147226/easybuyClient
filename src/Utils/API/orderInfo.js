@@ -27,6 +27,16 @@ const orderInfo = {
      */
     aliPay(id) {
         return axiosInstance.post("/orderInfo/aliPay", { id });
+    },
+    /**
+     * 提交订单
+     * @param {{address_id, order_pay_type, goodsList}} param0 
+     * @returns {Promise<Object>} 
+     */
+    submitOrder({ address_id, order_pay_type, goodsList }) {
+        return axiosInstance.post("/orderInfo/submitOrder", {
+            address_id, order_pay_type, goodsList
+        })
     }
 }
 
