@@ -219,4 +219,8 @@ const showDrawer = id => {
         }
     }
 }
+
+.right-page {
+    background-color: white;
+}
 </style>
