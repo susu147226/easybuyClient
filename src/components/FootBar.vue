@@ -161,7 +161,7 @@
   
 <style scoped lang="scss">
 .foot-top>li:hover {
-    color: greenyellow;
+    color: #fe6a00;
 
 }
 
@@ -178,7 +178,7 @@
 }
 
 .bottom-ul>ul>li+li:hover {
-    color: greenyellow;
+    color: #fe6a00;
 }
 
 .site-info {
